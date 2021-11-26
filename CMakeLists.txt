@@ -48,6 +48,10 @@ target_include_directories(AoC2015
         ${AOC_2015_HDR_PRIVATE}
         )
 
+add_custom_command(TARGET AoC2015 PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/test/ $<TARGET_FILE_DIR:AoC2015>)
+
 ################################################ Unity Library #########################################################
 file(GLOB UNITY_LIB_SOURCE_FILES
         test/tools/Unity/src/*.c)
@@ -87,3 +91,7 @@ target_include_directories(AoC2015Test
         ${AOC_2015_HDR_PUBLIC}
         ${AOC_2015_HDR_PRIVATE}
         )
+
+add_custom_command(TARGET AoC2015Test PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/test/ $<TARGET_FILE_DIR:AoC2015Test>)

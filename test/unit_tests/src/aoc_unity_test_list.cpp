@@ -47,7 +47,7 @@ void InitialiseTestList(TEST_TYPE enTestType)
 
       printf("Test 2015\n");
 
-      appendToList(head_node, "test_aoc2015", test_aoc2015);
+      appendToList(head_node, "test_aoc2015_day1", test_aoc2015_day1);
 
       break;
 
