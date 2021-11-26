@@ -5,7 +5,7 @@ import os
 import enum
 from git import Repo
 
-DEBUG = True
+DEBUG = False
 
 
 class ModuleEnum(enum.Enum):

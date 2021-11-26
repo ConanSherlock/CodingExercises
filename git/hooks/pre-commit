@@ -5,8 +5,6 @@ import os
 from check_for_changes import check_for_changes, ModuleEnum
 from update_version_number import update_version_number
 
-print("hello")
-
 FILE_KEY = "file"
 VERSION_KEYWORD = "version_keyword"
 
