@@ -8,7 +8,7 @@
 #include <fstream>
 #include "aoc15day1.hpp"
 #include "aoc_2015_version.hpp"
-#
+
 using namespace std;
 namespace aoc_2015 {
 #define EXPORT_API __declspec(dllexport)
