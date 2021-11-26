@@ -18,22 +18,31 @@ namespace aoc_2015 {
 class EXPORT_API AoC2015 {
 public:
 
-    // Constructor and Destructor
+    /*!
+        Constructor and Destructor
+    */
     AoC2015();
     ~AoC2015();
 
+    /*!
+        Function to reset the internal variables used in each Day.
+        \return void
+    */
     void reset();
 
+    /*!
+        Function to print the solution to Day 1.
+        \return void
+    */
     void Day1();
 
     /*!
-      Retrieves the version number of the 2015 implementation.
-      \return The version identifier as a string
+        Retrieves the version number of the 2015 implementation.
+        \return The version identifier as a string
     */
     static string AoC2015GetVersion();
 private:
     AoC2015Day1 day1;
-
 };
 
 

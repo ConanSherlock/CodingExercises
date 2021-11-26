@@ -2,7 +2,6 @@
 
 using namespace aoc_2015;
 
-
 AoC2015::AoC2015(){
     day1.reset();
 }
@@ -16,7 +15,7 @@ void AoC2015::reset(){
 void AoC2015::Day1() {
     string inputString;
     ifstream inputFile;
-    inputFile.open(R"(..\test\input_data\2015\day1_input.txt)");
+    inputFile.open(R"(./input_data/2015/day1_input.txt)");
 
     int actualFloor = 0;
     int actualBasementPosition = 0;
@@ -32,6 +31,8 @@ void AoC2015::Day1() {
     actualBasementPosition = day1.getBasementPosition();
 
     cout << "Basement Position: " << actualBasementPosition << "\n";
+
+    reset();
 }
 
 string AoC2015::AoC2015GetVersion() {
