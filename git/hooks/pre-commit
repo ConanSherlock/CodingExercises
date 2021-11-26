@@ -17,5 +17,6 @@ VERSION_FILE_DICT = {
 changes_dict = check_for_changes()
 
 if changes_dict[ModuleEnum.AoC2015.name]:
-    update_version_number(VERSION_FILE_DICT[ModuleEnum.AoC2015.name][FILE_KEY],
-                          VERSION_FILE_DICT[ModuleEnum.AoC2015.name][VERSION_KEYWORD])
+    if not update_version_number(VERSION_FILE_DICT[ModuleEnum.AoC2015.name][FILE_KEY],
+                                 VERSION_FILE_DICT[ModuleEnum.AoC2015.name][VERSION_KEYWORD]):
+        exit(-1)
