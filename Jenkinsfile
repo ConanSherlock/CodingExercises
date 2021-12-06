@@ -18,10 +18,12 @@ pipeline {
 
     stages {
         stage('Set up Environment') {
+            environment {
+              env.MAIL_LIST = "${DEFAULT_RECIPIENTS}"
+            }
             steps {
                 script {
                     jenkins_functions = load "jenkins_functions.groovy"
-                    env.MAIL_LIST = "${DEFAULT_RECIPIENTS}"
                     echo "${env.MAIL_LIST}"
                 }
                 dir('test/tools/conda') {
