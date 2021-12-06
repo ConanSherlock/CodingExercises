@@ -22,7 +22,8 @@ pipeline {
                 script {
                     jenkins_functions = load "jenkins_functions.groovy"
 
-                    MAIL_LIST = "${DEFAULT_RECIPIENTS}"
+                    echo "${env.DEFAULT_MAIL_RECIPIENTS}"
+                    MAIL_LIST = "${DEFAULT_MAIL_RECIPIENTS}"
                     echo "${env.MAIL_LIST}"
                 }
                 dir('test/tools/conda') {
