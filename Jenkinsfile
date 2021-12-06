@@ -21,10 +21,6 @@ pipeline {
             steps {
                 script {
                     jenkins_functions = load "jenkins_functions.groovy"
-
-                    echo "${env.DEFAULT_MAIL_RECIPIENTS}"
-                    MAIL_LIST = "${DEFAULT_MAIL_RECIPIENTS}"
-                    echo "${env.MAIL_LIST}"
                 }
                 dir('test/tools/conda') {
                     bat 'conda env update -q --file conda_environment.yml'
@@ -69,7 +65,7 @@ pipeline {
                   mimeType: 'text/html',
                   replyTo: '',
                   subject: "AoC Jenkins FAILURE: -> ${env.JOB_NAME}",
-                  to: "${env.MAIL_LIST}",
+                  to: "${env.DEFAULT_MAIL_RECIPIENTS}",
                   from: "Jenkins",
                   body: "<b>Jenkins Pipeline has failed</b><br>\n\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL} <br>/>";
         }
@@ -82,7 +78,7 @@ pipeline {
                   mimeType: 'text/html',
                   replyTo: '',
                   subject: "AoC Jenkins SUCCESS: -> ${env.JOB_NAME}",
-                  to: "${env.MAIL_LIST}",
+                  to: "${env.DEFAULT_MAIL_RECIPIENTS}",
                   from: "Jenkins",
                   body: "<b>Jenkins Pipeline has succeeded</b><br>\n\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL}<br>/>";
         }
