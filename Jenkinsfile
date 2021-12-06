@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     jenkins_functions = load "jenkins_functions.groovy"
-                    MAIL_LIST = ${DEFAULT_RECIPIENTS}
+                    MAIL_LIST = "${DEFAULT_RECIPIENTS}"
                 }
                 dir('test/tools/conda') {
                     bat 'conda env update -q --file conda_environment.yml'
