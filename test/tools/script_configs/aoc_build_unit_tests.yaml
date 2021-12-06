@@ -1,0 +1,3 @@
+buildDir: ../../../cmake-build-jenkins
+buildType: Release
+target: AoC2015Test
