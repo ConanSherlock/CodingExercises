@@ -33,7 +33,7 @@ pipeline {
                 echo 'Building..'
 				dir('test/tools/automation') {
                     script {
-                        def result = jenkins_functions.runCondaWin("python aoc_build.py --configFile aoc_build_all.yaml")
+                        def result = jenkins_functions.runCondaWin("python aoc_build.py --configFile ../script_configs/aoc_build_all.yaml")
                         if(result != env.SUCCESS) {
                             currentBuild.result = 'FAIL'
                             result = "FAIL"
