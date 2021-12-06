@@ -4,9 +4,9 @@ env.SUCCESS = 0
 env.BUILD_ERROR_STRING = "Error in build step"
 env.TEST_ERROR_STRING = "Error in running tests"
 env.DEPLOY_ERROR_STRING = "Error in deployment"
+env.MAIL_LIST = ""
 
 def BRANCH_NAME = "${env.JOB_NAME.substring(env.JOB_NAME.lastIndexOf('/') + 1, env.JOB_NAME.length())}"
-def MAIL_LIST = ""
 
 pipeline {
     agent {
@@ -21,7 +21,8 @@ pipeline {
             steps {
                 script {
                     jenkins_functions = load "jenkins_functions.groovy"
-                    MAIL_LIST = "${DEFAULT_RECIPIENTS}"
+                    env.MAIL_LIST = "${DEFAULT_RECIPIENTS}"
+                    echo "${env.MAIL_LIST}"
                 }
                 dir('test/tools/conda') {
                     bat 'conda env update -q --file conda_environment.yml'
@@ -66,7 +67,7 @@ pipeline {
                   mimeType: 'text/html',
                   replyTo: '',
                   subject: "AoC Jenkins FAILURE: -> ${env.JOB_NAME}",
-                  to: "${MAIL_LIST}",
+                  to: "${env.MAIL_LIST}",
                   from: "Jenkins",
                   body: "<b>Jenkins Pipeline has failed</b><br>\n\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL} <br>/>";
         }
@@ -79,7 +80,7 @@ pipeline {
                   mimeType: 'text/html',
                   replyTo: '',
                   subject: "AoC Jenkins SUCCESS: -> ${env.JOB_NAME}",
-                  to: "${MAIL_LIST}",
+                  to: "${env.MAIL_LIST}",
                   from: "Jenkins",
                   body: "<b>Jenkins Pipeline has succeeded</b><br>\n\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL}<br>/>";
         }
