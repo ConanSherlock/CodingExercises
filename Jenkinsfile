@@ -54,4 +54,32 @@ pipeline {
             }
         }
     }
+    post
+    {
+        failure
+        {
+            mail bcc: '',
+                  cc: '',
+                  charset: 'UTF-8',
+                  mimeType: 'text/html',
+                  replyTo: '',
+                  subject: "AoC Jenkins FAILURE: -> ${env.JOB_NAME}",
+                  to: "${DEFAULT_RECIPIENTS}",
+                  from: "Jenkins",
+                  body: "<b>Jenkins Pipeline has failed</b><br>\n\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL} <br>/>";
+        }
+
+        success
+        {
+            mail bcc: '',
+                  cc: '',
+                  charset: 'UTF-8',
+                  mimeType: 'text/html',
+                  replyTo: '',
+                  subject: "AoC Jenkins SUCCESS: -> ${env.JOB_NAME}",
+                  to: "${DEFAULT_RECIPIENTS}",
+                  from: "Jenkins",
+                  body: "<b>Jenkins Pipeline has succeeded</b><br>\n\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL}<br>/>";
+        }
+    }
 }
