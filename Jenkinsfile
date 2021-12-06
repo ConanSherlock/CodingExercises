@@ -4,8 +4,8 @@ env.SUCCESS = 0
 env.BUILD_ERROR_STRING = "Error in build step"
 env.TEST_ERROR_STRING = "Error in running tests"
 env.DEPLOY_ERROR_STRING = "Error in deployment"
-env.MAIL_LIST = ""
 
+def MAIL_LIST
 def BRANCH_NAME = "${env.JOB_NAME.substring(env.JOB_NAME.lastIndexOf('/') + 1, env.JOB_NAME.length())}"
 
 pipeline {
@@ -18,12 +18,11 @@ pipeline {
 
     stages {
         stage('Set up Environment') {
-            environment {
-              env.MAIL_LIST = "${DEFAULT_RECIPIENTS}"
-            }
             steps {
                 script {
                     jenkins_functions = load "jenkins_functions.groovy"
+
+                    MAIL_LIST = "${DEFAULT_RECIPIENTS}"
                     echo "${env.MAIL_LIST}"
                 }
                 dir('test/tools/conda') {
