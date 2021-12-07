@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "aoc15day1.hpp"
+#include "aoc_2015_day1.hpp"
 
 using namespace std;
 

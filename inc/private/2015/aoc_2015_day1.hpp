@@ -31,7 +31,7 @@ public:
 
     /*!
         Function to find the position of the character that first puts Santa in the basement which is -1 by
-        default/unfound
+        default/not found
         \return int 1 indexed position in the string
     */
     int getBasementPosition() const;    // NOLINT
@@ -43,9 +43,9 @@ public:
     void reset();
 
 private:
-    int iloopCount;
-    int ifloorNumber;
-    int ibasementPosition;
+    int iLoopCount;
+    int iFloorNumber;
+    int iBasementPosition;
 };
 
 #endif //AOC_2015_DAY1_HPP_
