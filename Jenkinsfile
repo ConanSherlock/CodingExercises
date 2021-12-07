@@ -5,7 +5,6 @@ env.BUILD_ERROR_STRING = "Error in build step"
 env.TEST_ERROR_STRING = "Error in running tests"
 env.DEPLOY_ERROR_STRING = "Error in deployment"
 
-def MAIL_LIST
 def BRANCH_NAME = "${env.JOB_NAME.substring(env.JOB_NAME.lastIndexOf('/') + 1, env.JOB_NAME.length())}"
 
 pipeline {
@@ -47,6 +46,16 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+				dir('test/tools/automation') {
+                    script {
+                        def result = jenkins_functions.runCondaWin("python aoc_run_unit_tests.py --configFile ../script_configs/aoc_run_2015_unit_tests.yaml")
+                        if(result != env.SUCCESS) {
+                            currentBuild.result = 'FAIL'
+                            result = "FAIL"
+                            error(env.BUILD_ERROR_STRING)
+                        }
+                    }
+                }
             }
         }
         stage('Deploy') {
@@ -67,7 +76,7 @@ pipeline {
                   subject: "AoC Jenkins FAILURE: -> ${env.JOB_NAME}",
                   to: "${env.DEFAULT_MAIL_RECIPIENTS}",
                   from: "Jenkins",
-                  body: "<b>Jenkins Pipeline has failed</b><br>\n\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL} <br>";
+                  body: "<b>Jenkins Pipeline has failed</b><br>\n\n<br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br>Build URL: ${env.BUILD_URL}<br>";
         }
 
         success
