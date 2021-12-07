@@ -11,7 +11,6 @@ DEFAULT_CONFIG_FILE = "../script_configs/aoc_build_unit_tests.yaml"
 BUILD_DIR_KEY = "buildDir"
 BUILD_TYPE_KEY = "buildType"
 TARGET_KEY = "target"
-CORES_KEY = "cores"
 
 MIN_GW = "mingw32-make.exe"
 
@@ -45,7 +44,7 @@ class AoCBuild:
         self.build_dir = build_dir
         self.build_type = "Release"
         self.target = "all"
-        self.DEBUG = True
+        self.DEBUG = False
 
     def __clean_build_files(self):
         try:
