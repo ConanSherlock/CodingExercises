@@ -29,17 +29,29 @@ void InitialiseTestList(TEST_TYPE enTestType)
 
       printf("Short Tests");
 
+      printf("Test 2015 Short Tests\n");
+
+      appendToList(head_node, "test_aoc2015_day1", test_aoc2015_day1);
+
       break;
 
     case MEDIUM_TEST_TYPE:
 
       printf("Medium Tests");
 
+      printf("Test 2015 Medium Tests\n");
+
+      appendToList(head_node, "test_aoc2015_day1", test_aoc2015_day1);
+
       break;
 
     case LONG_TEST_TYPE:
 
       printf("Long Tests");
+
+      printf("Test 2015 Long Tests\n");
+
+      appendToList(head_node, "test_aoc2015_day1", test_aoc2015_day1);
 
       break;
 

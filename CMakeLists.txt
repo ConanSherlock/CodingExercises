@@ -32,7 +32,7 @@ target_include_directories(AoC2015Lib
         ${AOC_2015_HDR_PRIVATE}
         )
 
-################################################ AOC2015 ###############################################################
+################################################ AOC2015 Executable ####################################################
 file(GLOB AOC_2015_EXE_SRC_FILES
         src/public/2015/*.cpp
         src/private/2015/*.cpp
@@ -50,14 +50,14 @@ target_include_directories(AoC2015
 
 add_custom_command(TARGET AoC2015 PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/test/ $<TARGET_FILE_DIR:AoC2015>)
+        ${CMAKE_SOURCE_DIR}/test/input_data $<TARGET_FILE_DIR:AoC2015>/input_data)
 
 ################################################ Unity Library #########################################################
 file(GLOB UNITY_LIB_SOURCE_FILES
-        test/tools/Unity/src/*.c)
+        test/tools/unity/src/*.c)
 
 file(GLOB UNITY_LIB_HEADER_FILES
-        test/tools/Unity/inc
+        test/tools/unity/inc
         )
 
 set(unity_lib_files ${UNITY_LIB_SOURCE_FILES})
@@ -94,4 +94,4 @@ target_include_directories(AoC2015Test
 
 add_custom_command(TARGET AoC2015Test PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_SOURCE_DIR}/test/ $<TARGET_FILE_DIR:AoC2015Test>)
+        ${CMAKE_SOURCE_DIR}/test/input_data $<TARGET_FILE_DIR:AoC2015Test>/input_data)

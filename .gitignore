@@ -144,3 +144,10 @@ fabric.properties
 /git/hooks/.idea/*
 /git/hooks/__pycache__/update_version_number.cpython-38.pyc
 /git/hooks/__pycache__/check_for_changes.cpython-38.pyc
+/CMakeCache.txt
+/CMakeFiles/
+/compile_commands.json
+/Makefile
+/cmake_install.cmake
+/jenkins-build-release/
+/jenkins-build/
