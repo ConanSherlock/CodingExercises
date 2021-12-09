@@ -1,5 +1,4 @@
-#include <cstring>
-# include "aoc15day1.hpp"
+#include "aoc15day1.hpp"
 
 AoC2015Day1::AoC2015Day1() {
     ifloorNumber = 0;
