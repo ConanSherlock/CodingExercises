@@ -1,0 +1,25 @@
+name: cs_aoc
+channels:
+  - plotly
+  - defaults
+dependencies:
+  - python=3.8.5
+  - autopep8
+  - gitpython
+  - jinja2
+  - jupyter
+  - matplotlib
+  - numpy
+  - pandas
+  - pdoc3
+  - pip
+  - plotly
+  - pyyaml
+  - scipy
+  - plotly-orca
+  - pip:
+    - -r pip_requirements.txt
+    - streamlit
+    - plotly
+    - git-python
+    - gitpython

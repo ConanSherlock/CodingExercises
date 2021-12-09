@@ -1,0 +1,4 @@
+exePath: "../../../cmake-build-jenkins/AoC2015Test.exe"
+testType: "2015"
+unit: "ALL"
+getTests: "0"

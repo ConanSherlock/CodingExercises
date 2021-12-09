@@ -1,0 +1,23 @@
+#!/bin/python
+# Pre-commit hook to check for changes in the current repo and update build numbers for the different module if they
+# contain changes
+import os
+from check_for_changes import check_for_changes, ModuleEnum
+from update_version_number import update_version_number
+
+FILE_KEY = "file"
+VERSION_KEYWORD = "version_keyword"
+
+VERSION_FILE_DICT = {
+    ModuleEnum.AoC2015.name: {
+        FILE_KEY: "./inc/private/2015/aoc_2015_version.hpp",
+        VERSION_KEYWORD: "AOC_2015_BUILD_NUM"
+    }
+}
+
+changes_dict = check_for_changes()
+
+if changes_dict[ModuleEnum.AoC2015.name]:
+    if not update_version_number(VERSION_FILE_DICT[ModuleEnum.AoC2015.name][FILE_KEY],
+                                 VERSION_FILE_DICT[ModuleEnum.AoC2015.name][VERSION_KEYWORD]):
+        exit(-1)
