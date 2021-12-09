@@ -141,3 +141,6 @@ fabric.properties
 .idea/codestream.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/clion
+/git/hooks/.idea/*
+/git/hooks/__pycache__/update_version_number.cpython-38.pyc
+/git/hooks/__pycache__/check_for_changes.cpython-38.pyc

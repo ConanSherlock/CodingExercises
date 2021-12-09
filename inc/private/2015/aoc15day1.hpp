@@ -6,22 +6,40 @@
 #include <string>
 #include <iostream>
 
-
 using namespace std;
 
-// Class to implement the solution to AoC 2015 Day 1
-// This class takes an input string of ( and ). It then uses this to calculate what floor Santa will be on, and it also
-// captures the index/position santa first enters the basement. This basement value is 1 indexed instead of the usual
-// 0 indexing
+/*!
+    Class to implement the solution to AoC 2015 Day 1
+    This class takes an input string of ( and ). It then uses this to calculate what floor Santa will be on, and it also
+    captures the index/position santa first enters the basement. This basement value is 1 indexed instead of the usual
+    0 indexing
+*/
 class AoC2015Day1 {
 public:
 
-    // Constructor and Destructor
+    /*!
+        Constructor and Destructor
+    */
     AoC2015Day1();
     ~AoC2015Day1();
 
+    /*!
+        Function to find the floor Santa is on based on an input string.
+        \return int Floor number
+    */
     int findFloor(string &inputString);
+
+    /*!
+        Function to find the position of the character that first puts Santa in the basement which is -1 by
+        default/unfound
+        \return int 1 indexed position in the string
+    */
     int getBasementPosition() const;    // NOLINT
+
+    /*!
+        Function to reset the internal variables used in Day 1.
+        \return void
+    */
     void reset();
 
 private:
