@@ -6,13 +6,14 @@
 
 AoC2015Day3::AoC2015Day3() {
     bRobotActivated = false;
+    bRobotDelivered = false;
     iSantaXCoords = 0;
     iSantaYCoords = 0;
     iRoboXCoords = 0;
     iRoboYCoords = 0;
     uiTotalDeliveries = 1;
     uiTotalHousesVisited = 1;
-    mmsiHouseMap.insert({convertCordsToKey(false), 1});
+    mmsiHouseMap.insert({convertCordsToStringKey(false), 1});
 }
 
 void AoC2015Day3::activateRobot(){
@@ -103,10 +104,10 @@ bool AoC2015Day3::updateRoboSantaPosition(char input){
 }
 
 void AoC2015Day3::updateMap(bool robo){
-    auto it = mmsiHouseMap.find(convertCordsToKey(robo));
+    auto it = mmsiHouseMap.find(convertCordsToStringKey(robo));
 
     if(it == mmsiHouseMap.end()){
-        mmsiHouseMap.insert({convertCordsToKey(robo), 1});
+        mmsiHouseMap.insert({convertCordsToStringKey(robo), 1});
     } else{
         it->second += 1;
     }
@@ -121,7 +122,7 @@ unsigned int AoC2015Day3::getTotalHousesVisited() const {
     return uiTotalHousesVisited;
 }
 
-string AoC2015Day3::convertCordsToKey(bool robo) const {
+string AoC2015Day3::convertCordsToStringKey(bool robo) const {
     if (robo){
         return "X:" + to_string(iRoboXCoords) + " Y:" + to_string(iRoboYCoords);
     } else{
@@ -132,6 +133,7 @@ string AoC2015Day3::convertCordsToKey(bool robo) const {
 
 void AoC2015Day3::reset(){
     bRobotActivated = false;
+    bRobotDelivered = false;
     iSantaXCoords = 0;
     iSantaYCoords = 0;
     iRoboXCoords = 0;
@@ -139,7 +141,7 @@ void AoC2015Day3::reset(){
     uiTotalDeliveries = 1;
     uiTotalHousesVisited = 1;
     mmsiHouseMap.clear();
-    mmsiHouseMap.insert({convertCordsToKey(false), 1});
+    mmsiHouseMap.insert({convertCordsToStringKey(false), 1});
 }
 
 AoC2015Day3::~AoC2015Day3() = default;
