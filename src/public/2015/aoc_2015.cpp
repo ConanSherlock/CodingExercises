@@ -20,7 +20,6 @@ void AoC2015::Day1() {
     inputFile.open(R"(./input_data/2015/day1_input.txt)");
 
     int iFloor = 0;
-    int iBasementPosition = 0;
 
     if ( inputFile.is_open() ) {
         inputFile >> inputString;
@@ -31,10 +30,7 @@ void AoC2015::Day1() {
     inputFile.close();
 
     cout << "Floor: " << iFloor << "\n";
-
-    iBasementPosition = day1.getBasementPosition();
-
-    cout << "Basement Position: " << iBasementPosition << "\n";
+    cout << "Basement Position: " << day1.getBasementPosition() << "\n";
 }
 
 void AoC2015::Day2() {
