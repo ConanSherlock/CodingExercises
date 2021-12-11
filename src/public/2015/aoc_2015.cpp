@@ -5,6 +5,7 @@ using namespace aoc_2015;
 AoC2015::AoC2015(){
     day1.reset();
     day2.reset();
+    day3.reset();
 }
 
 AoC2015::~AoC2015() = default;
@@ -12,6 +13,7 @@ AoC2015::~AoC2015() = default;
 void AoC2015::reset(){
     day1.reset();
     day2.reset();
+    day3.reset();
 }
 
 void AoC2015::Day1() {
@@ -62,6 +64,10 @@ void AoC2015::Day2() {
 
     cout << "Square feet of present paper: " << sumAreaOfPaperNeeded << "\n";
     cout << "Feet of ribbon needed: " << sumLengthOfRibbonNeeded << "\n";
+
+}
+
+void AoC2015::Day3() {
 
 }
 

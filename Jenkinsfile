@@ -52,7 +52,7 @@ pipeline {
                         if(result != env.SUCCESS) {
                             currentBuild.result = 'FAIL'
                             result = "FAIL"
-                            error(env.BUILD_ERROR_STRING)
+                            error(env.TEST_ERROR_STRING)
                         }
                     }
                 }
