@@ -185,6 +185,46 @@ void test_aoc_day3_basic_input_with_robo_santa() {
     TEST_ASSERT_EQUAL(expectedHousesVisited, actualHousesVisited);
     TEST_ASSERT_EQUAL(expectedPresentsDelivered, actualPresentsDelivered);
 
+    // Test robo activation and deactivation
+
+    day3.reset();
+
+    expectedHousesVisited = 1;
+    expectedPresentsDelivered = 1;
+
+    actualHousesVisited = day3.getTotalHousesVisited();
+    actualPresentsDelivered = day3.getTotalDeliveries();
+
+    TEST_ASSERT_EQUAL(expectedHousesVisited, actualHousesVisited);
+    TEST_ASSERT_EQUAL(expectedPresentsDelivered, actualPresentsDelivered);
+
+    expectedPresentsDelivered = 2;
+
+    day3.activateRobot();
+
+    actualHousesVisited = day3.getTotalHousesVisited();
+    actualPresentsDelivered = day3.getTotalDeliveries();
+
+    TEST_ASSERT_EQUAL(expectedHousesVisited, actualHousesVisited);
+    TEST_ASSERT_EQUAL(expectedPresentsDelivered, actualPresentsDelivered);
+
+    day3.deactivateRobot();
+
+    actualHousesVisited = day3.getTotalHousesVisited();
+    actualPresentsDelivered = day3.getTotalDeliveries();
+
+    TEST_ASSERT_EQUAL(expectedHousesVisited, actualHousesVisited);
+    TEST_ASSERT_EQUAL(expectedPresentsDelivered, actualPresentsDelivered);
+
+    day3.activateRobot();
+
+    expectedPresentsDelivered = 3;
+
+    actualHousesVisited = day3.getTotalHousesVisited();
+    actualPresentsDelivered = day3.getTotalDeliveries();
+
+    TEST_ASSERT_EQUAL(expectedHousesVisited, actualHousesVisited);
+    TEST_ASSERT_EQUAL(expectedPresentsDelivered, actualPresentsDelivered);
 }
 
 void test_aoc_day3_input_file_solo_santa() {
