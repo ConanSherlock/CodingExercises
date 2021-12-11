@@ -43,15 +43,29 @@ public:
 
     unsigned int getTotalHousesVisited() const;          // NOLINT
 
+    void activateRobot();
+
+    void deactivateRobot();
+
     void reset();
 
 private:
 
-    string convertCordsToKey() const;           // NOLINT
+    string convertCordsToKey(bool robo) const;           // NOLINT
 
-    int iXCoords;
-    int iYCoords;
-    int iTotalDeliveries;
+    void updateMap(bool robo);
+
+    bool updateSantaPosition(char input);
+
+    bool updateRoboSantaPosition(char input);
+
+    int iSantaXCoords;
+    int iRoboXCoords;
+    int iSantaYCoords;
+    int iRoboYCoords;
+    int uiTotalDeliveries;
+    bool bRobotActivated;
+    bool bRobotDelivered;
     unsigned int uiTotalHousesVisited;
     multimap<string, int> mmsiHouseMap;
 };
