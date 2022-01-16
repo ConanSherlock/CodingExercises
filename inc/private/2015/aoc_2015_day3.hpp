@@ -7,16 +7,9 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include "santa_2015.hpp"
 
 using namespace std;
-
-enum move_house
-{
-    NORTH = '^',
-    SOUTH = 'v',
-    EAST = '>',
-    WEST = '<'
-};
 
 /*!
     Class to implement the solution to AoC 2015 Day 3
@@ -84,20 +77,12 @@ private:
 
     /*!
         Function to update the coordinates of Santa and deliver a present, returns a bool if input is not valid
-        \return bool badInput
+        \return void
     */
-    bool updateSantaPosition(char input);
+    void updateSantaPosition(char input);
 
-    /*!
-        Function to update the coordinates of Robo Santa and deliver a present, returns a bool if input is not valid
-        \return bool badInput
-    */
-    bool updateRoboSantaPosition(char input);
-
-    int iSantaXCoords;
-    int iRoboXCoords;
-    int iSantaYCoords;
-    int iRoboYCoords;
+    Santa2015 Santa;
+    Santa2015 RoboSanta;
     int uiTotalDeliveries;
     bool bRobotActivated;
     bool bRobotDelivered;

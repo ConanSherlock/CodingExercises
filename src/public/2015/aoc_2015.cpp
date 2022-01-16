@@ -126,6 +126,8 @@ void AoC2015::Day4() {
     string inputFileLocation = R"(./input_data/2015/day4_input.txt)";
     ifstream inputFile;
 
+    day4.basic();
+
     cout << "--- Day 4: The Ideal Stocking Stuffer ---\n";
 }
 
