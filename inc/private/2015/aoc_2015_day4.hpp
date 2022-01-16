@@ -22,6 +22,8 @@ public:
     AoC2015Day4();
     ~AoC2015Day4();
 
+    void basic();
+
     void reset();
 
 private:

@@ -12,4 +12,8 @@ void AoC2015Day4::reset() {
 
 }
 
+void AoC2015Day4::basic() {
+
+}
+
 AoC2015Day4::~AoC2015Day4() = default;
