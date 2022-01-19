@@ -34,13 +34,14 @@ file(GLOB EXTERNAL_HDR
         )
 
 
-set(aoc_2015_lib_files ${AOC_2015_SRC_FILES})
-add_library(AoC2015Lib STATIC ${AOC_2015_SRC_FILES})
+set(aoc_2015_lib_files ${AOC_2015_SRC_FILES} ${EXTERNAL_SRC_FILES})
+add_library(AoC2015Lib STATIC ${aoc_2015_lib_files})
 target_include_directories(AoC2015Lib
         PUBLIC
         ${AOC_2015_HDR_PUBLIC}
         PRIVATE
         ${AOC_2015_HDR_PRIVATE}
+        ${EXTERNAL_HDR}
         )
 
 
@@ -59,6 +60,7 @@ target_include_directories(AoC2015
         ${AOC_2015_HDR_PUBLIC}
         PRIVATE
         ${AOC_2015_HDR_PRIVATE}
+        ${EXTERNAL_HDR}
         )
 
 add_custom_command(TARGET AoC2015 PRE_BUILD
@@ -104,6 +106,7 @@ target_include_directories(AoC2015Test
 
         ${AOC_2015_HDR_PUBLIC}
         ${AOC_2015_HDR_PRIVATE}
+        ${EXTERNAL_HDR}
         )
 
 add_custom_command(TARGET AoC2015Test PRE_BUILD

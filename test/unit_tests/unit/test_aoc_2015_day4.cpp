@@ -47,11 +47,9 @@ void test_aoc_day4_input_file() {
     string inputFileName = {"./input_data/2015/day4_input.txt"};
     inputFile.open(inputFileName);
 
-    day4.basic();
-
     if (inputFile.is_open()) {
         while (getline(inputFile, inputString)) {
-
+            day4.basic(inputString, 0);
         }
     }
 
