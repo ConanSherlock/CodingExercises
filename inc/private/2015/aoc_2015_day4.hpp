@@ -8,6 +8,8 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <iomanip>
+#include "md5.h"
 
 using namespace std;
 
@@ -22,12 +24,12 @@ public:
     AoC2015Day4();
     ~AoC2015Day4();
 
-    void basic();
+    void basic(string &inputString, int stringLength);
 
     void reset();
 
 private:
-
+    size_t MAX_DIGEST_LENGTH;
 };
 
 #endif //CPP_AOC_2015_DAY4_H
