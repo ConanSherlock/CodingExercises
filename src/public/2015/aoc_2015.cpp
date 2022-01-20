@@ -28,6 +28,8 @@ void AoC2015::Day1() {
         iFloor = day1.findFloor(inputString);
     }
 
+    inputFile.close();
+
     cout << "Floor: " << iFloor << "\n";
 
     iBasementPosition = day1.getBasementPosition();
@@ -59,6 +61,8 @@ void AoC2015::Day2() {
             }
         }
     }
+
+    inputFile.close();
 
     cout << "Square feet of present paper: " << sumAreaOfPaperNeeded << "\n";
     cout << "Feet of ribbon needed: " << sumLengthOfRibbonNeeded << "\n";

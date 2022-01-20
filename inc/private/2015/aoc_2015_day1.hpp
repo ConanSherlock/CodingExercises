@@ -8,6 +8,18 @@
 
 using namespace std;
 
+enum AOC_2015_DAY1_EXCEPTIONS{
+    INVALID_CHARACTER,
+};
+
+const char * aoc2015Day1ExceptionToString(AOC_2015_DAY1_EXCEPTIONS type);
+
+struct InvalidCharacter : public exception {
+    const char * what () const noexcept override {                          // NOLINT
+        return aoc2015Day1ExceptionToString(INVALID_CHARACTER);
+    }
+};
+
 /*!
     Class to implement the solution to AoC 2015 Day 1
     This class takes an input string of ( and ). It then uses this to calculate what floor Santa will be on, and it also

@@ -32,6 +32,7 @@ void test_aoc_day1_basic_input_floor() {
     string inputStringsFloor3[3] = {"(((", "(()(()(", "))((((("};
     string inputStringsFloorMinus1[2] = {"())", "))("};
     string inputStringsFloorMinus3[2] = {")))", ")())())"};
+    string inputStringInvalid = {"This is a string full of junk characters that will be ignored"};
 
     expectedFloor = 0;
     for (auto &i: inputStringsFloor0) {
@@ -60,6 +61,16 @@ void test_aoc_day1_basic_input_floor() {
         TEST_ASSERT_EQUAL(expectedFloor, actualFloor);
         day1.reset();
     }
+
+    try {
+        day1.findFloor(inputStringInvalid);
+        TEST_ASSERT(false);
+    } catch (InvalidCharacter& e){
+        std::cout << "MyException caught" << std::endl;
+        std::cout << e.what() << std::endl;
+
+        TEST_ASSERT(aoc2015Day1ExceptionToString(INVALID_CHARACTER) == e.what());
+    }
 }
 
 void test_aoc_day1_basic_input_basement() {
@@ -74,6 +85,7 @@ void test_aoc_day1_basic_input_basement() {
 
     string inputBasementPos1 = {")"};
     string inputBasementPos5 = {"()())"};
+    string inputBasementPos0 = {"("};
 
     expectedBasementPos = 1;
 
@@ -84,6 +96,12 @@ void test_aoc_day1_basic_input_basement() {
 
     expectedBasementPos = 5;
     day1.findFloor(inputBasementPos5);
+    actualBasementPos = day1.getBasementPosition();
+    TEST_ASSERT_EQUAL(expectedBasementPos, actualBasementPos);
+    day1.reset();
+
+    expectedBasementPos = 0;
+    day1.findFloor(inputBasementPos0);
     actualBasementPos = day1.getBasementPosition();
     TEST_ASSERT_EQUAL(expectedBasementPos, actualBasementPos);
     day1.reset();
@@ -113,6 +131,8 @@ void test_aoc_day1_input_file() {
         actualFloor = day1.findFloor(inputString);
     }
     actualBasementPosition = day1.getBasementPosition();
+
+    inputFile.close();
 
     TEST_ASSERT_EQUAL(expectedFloor, actualFloor);
     TEST_ASSERT_EQUAL(expectedBasementPosition, actualBasementPosition);
