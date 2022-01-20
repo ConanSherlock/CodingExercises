@@ -125,7 +125,7 @@ void MD5::init(const byte* input, size_t len) {
 }
 
 /**
- * @MD5 basic transformation. Transforms state based on block.
+ * @MD5 md5LeadingZeroes transformation. Transforms state based on block.
  *
  * @param {block} the message block.
  */

@@ -132,7 +132,7 @@ void AoC2015::Day4() {
 
     if (inputFile.is_open()) {
         while (getline(inputFile, inputString)) {
-            day4.basic(inputString, 0);
+            day4.md5LeadingZeroes(inputString, 0);
         }
     }
 

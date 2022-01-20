@@ -16,6 +16,9 @@ using namespace std;
 /*!
     Class to implement the solution to AoC 2015 Day 4
 */
+
+#define MAX_DIGEST_LENGTH 16
+
 class AoC2015Day4 {
 public:
     /*!
@@ -24,12 +27,16 @@ public:
     AoC2015Day4();
     ~AoC2015Day4();
 
-    void basic(string &inputString, int stringLength);
+    int md5LeadingZeroes(string &inputString, int leadingZeroes);
+    int getSecretCode() const;  //NOLINT
+    int getLeadingZeroes() const;  //NOLINT
 
     void reset();
 
 private:
-    size_t MAX_DIGEST_LENGTH;
+    bool bDebugPrint;
+    int iLeadingZeroCount;
+    int iIntCode;
 };
 
 #endif //CPP_AOC_2015_DAY4_H
