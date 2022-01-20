@@ -7,7 +7,7 @@ import os
 import shutil
 import yaml
 
-DEFAULT_CONFIG_FILE = "../script_configs/aoc_build_unit_tests.yaml"
+DEFAULT_CONFIG_FILE = "../script_configs/aoc_build_all.yaml"
 BUILD_DIR_KEY = "buildDir"
 BUILD_TYPE_KEY = "buildType"
 TARGET_KEY = "target"

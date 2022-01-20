@@ -1,5 +1,14 @@
 #include "aoc_2015_day1.hpp"
 
+const char * aoc2015Day1ExceptionToString(AOC_2015_DAY1_EXCEPTIONS type) {
+    switch(type) {
+        case INVALID_CHARACTER:
+            return "\n Invalid Character in string";
+        default:
+            return "Unknown exception";
+    }
+}
+
 AoC2015Day1::AoC2015Day1() {
     iFloorNumber = 0;
     iBasementPosition = -1;
@@ -12,6 +21,9 @@ int AoC2015Day1::findFloor(string &inputString) {
             iFloorNumber++;
         } else if (i == ')'){
             iFloorNumber--;
+        } else{
+            cerr << i << " is an invalid character\n";
+            throw InvalidCharacter();
         }
         if(iFloorNumber < 0 && iBasementPosition < 0){
             iBasementPosition = iLoopCount;

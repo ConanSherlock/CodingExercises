@@ -36,6 +36,15 @@ void test_aoc_day2_basic_input() {
     string inputString2 = "1x1x10";
     string inputString3 = "RandomCharacters";
 
+    // No input, no calc Check
+    expectedTotalPaper = -2;
+    expectedTotalRibbon = -1;
+
+    actualTotalPaper = day2.getPresentPaper();
+    actualTotalRibbon = day2.getRibbonLength();
+    TEST_ASSERT_EQUAL(expectedTotalPaper, actualTotalPaper);
+    TEST_ASSERT_EQUAL(expectedTotalRibbon, actualTotalRibbon);
+
     // Good input Check
     expectedTotalPaper = 58;
     expectedTotalRibbon = 34;
@@ -103,6 +112,8 @@ void test_aoc_day2_input_file() {
             }
         }
     }
+
+    inputFile.close();
 
     TEST_ASSERT_EQUAL(expectedAreaOfPaperNeeded, actualSumAreaOfPaperNeeded);
     TEST_ASSERT_EQUAL(expectedLengthOfRibbonNeeded, actualSumLengthOfRibbonNeeded);
