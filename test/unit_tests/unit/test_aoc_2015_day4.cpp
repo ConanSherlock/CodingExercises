@@ -62,7 +62,6 @@ void test_aoc_day4_input_file() {
             TEST_ASSERT_EQUAL(expectedIntCode1, actualIntCode);
 
             actualIntCode = day4.md5LeadingZeroes(inputString, 6);
-            cout << actualIntCode;
             TEST_ASSERT_EQUAL(expectedIntCode2, actualIntCode);
 
         }
