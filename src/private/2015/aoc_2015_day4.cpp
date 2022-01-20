@@ -7,23 +7,25 @@
 AoC2015Day4::AoC2015Day4() {
     bDebugPrint = false;
     iLeadingZeroCount=0;
-    iIntCode=-1;
+    iIntCode=0;
 }
 
 void AoC2015Day4::reset() {
     bDebugPrint = false;
     iLeadingZeroCount=0;
-    iIntCode=-1;
+    iIntCode=0;
 }
 
 int AoC2015Day4::md5LeadingZeroes(string &inputString, int leadingZeroes) {
     string md5Input;
     const byte *digest;
 
-    for (uint32_t i = 0; i < UINT32_MAX; i++) {
+    for (uint32_t i = 1; i < UINT32_MAX; i++) {
         md5Input = inputString + to_string(i);
 
-        cout << md5Input;
+        if(bDebugPrint) {
+            cout << md5Input << "\n";
+        }
 
         MD5 md5(md5Input);
         digest = md5.getDigest();
@@ -42,10 +44,10 @@ int AoC2015Day4::md5LeadingZeroes(string &inputString, int leadingZeroes) {
                 iLeadingZeroCount += 2;
             } else if (digest[j] < 10) {
                 iLeadingZeroCount++;
-                iIntCode = int(j);
+                iIntCode = i;
                 break;
             } else {
-                iIntCode = int(j);
+                iIntCode = i;
                 break;
             }
         }
@@ -54,7 +56,7 @@ int AoC2015Day4::md5LeadingZeroes(string &inputString, int leadingZeroes) {
             break;
         } else {
             iLeadingZeroCount = 0;
-            iIntCode= -1;
+            iIntCode= 0;
         }
     }
 
