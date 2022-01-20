@@ -36,7 +36,7 @@ public:
 private:
     bool bDebugPrint;
     int iLeadingZeroCount;
-    int iIntCode;
+    uint32_t iIntCode;
 };
 
 #endif //CPP_AOC_2015_DAY4_H
