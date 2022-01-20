@@ -27,6 +27,8 @@ typedef enum TEST_TYPE {
 /** ***************************************** Test Suite List *********************************************************/
 extern void test_aoc2015_day1(bool printTest);
 extern void test_aoc2015_day2(bool printTest);
+extern void test_aoc2015_day3(bool printTest);
+extern void test_aoc2015_day4(bool printTest);
 
 /** ***************************************** Public Function Declarations ********************************************/
 
