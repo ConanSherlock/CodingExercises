@@ -102,7 +102,7 @@ private:
      * and updating the context.*/
     void init(const byte* input, size_t len);
 
-    /* MD5 basic transformation. Transforms state based on block. */
+    /* MD5 md5LeadingZeroes transformation. Transforms state based on block. */
     void transform(const byte block[64]);
 
     /* Encodes input (usigned long) into output (byte). */
