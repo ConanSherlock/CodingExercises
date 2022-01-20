@@ -6,10 +6,12 @@
 int main() {
     AoC2015 aoc2015;
 
-    cout << "Version number: " << AoC2015::AoC2015GetVersion() << "\n";
+    cout << "Version number: " << AoC2015::AoC2015GetVersion() << "\n\n";
 
     aoc2015.Day1();
     aoc2015.Day2();
+    aoc2015.Day3();
+    aoc2015.Day4();
 
     aoc2015.reset();
 

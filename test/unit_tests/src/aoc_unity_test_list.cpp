@@ -31,6 +31,8 @@ void InitialiseTestList(TEST_TYPE enTestType) {
 
             appendToList(head_node, "test_aoc2015_day1", test_aoc2015_day1);
             appendToList(head_node, "test_aoc2015_day2", test_aoc2015_day2);
+            appendToList(head_node, "test_aoc2015_day3", test_aoc2015_day3);
+            appendToList(head_node, "test_aoc2015_day4", test_aoc2015_day4);
 
             break;
 
@@ -42,6 +44,8 @@ void InitialiseTestList(TEST_TYPE enTestType) {
 
             appendToList(head_node, "test_aoc2015_day1", test_aoc2015_day1);
             appendToList(head_node, "test_aoc2015_day2", test_aoc2015_day2);
+            appendToList(head_node, "test_aoc2015_day3", test_aoc2015_day3);
+            appendToList(head_node, "test_aoc2015_day4", test_aoc2015_day4);
 
             break;
 
@@ -53,6 +57,8 @@ void InitialiseTestList(TEST_TYPE enTestType) {
 
             appendToList(head_node, "test_aoc2015_day1", test_aoc2015_day1);
             appendToList(head_node, "test_aoc2015_day2", test_aoc2015_day2);
+            appendToList(head_node, "test_aoc2015_day3", test_aoc2015_day3);
+            appendToList(head_node, "test_aoc2015_day4", test_aoc2015_day4);
 
             break;
 
@@ -62,6 +68,8 @@ void InitialiseTestList(TEST_TYPE enTestType) {
 
             appendToList(head_node, "test_aoc2015_day1", test_aoc2015_day1);
             appendToList(head_node, "test_aoc2015_day2", test_aoc2015_day2);
+            appendToList(head_node, "test_aoc2015_day3", test_aoc2015_day3);
+            appendToList(head_node, "test_aoc2015_day4", test_aoc2015_day4);
 
             break;
 

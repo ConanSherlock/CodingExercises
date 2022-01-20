@@ -5,6 +5,7 @@ using namespace aoc_2015;
 AoC2015::AoC2015(){
     day1.reset();
     day2.reset();
+    day3.reset();
 }
 
 AoC2015::~AoC2015() = default;
@@ -12,15 +13,19 @@ AoC2015::~AoC2015() = default;
 void AoC2015::reset(){
     day1.reset();
     day2.reset();
+    day3.reset();
+    day4.reset();
 }
 
 void AoC2015::Day1() {
     string inputString;
     ifstream inputFile;
+
+    cout << "--- Day 1: Not Quite Lisp ---\n";
+
     inputFile.open(R"(./input_data/2015/day1_input.txt)");
 
     int iFloor = 0;
-    int iBasementPosition = 0;
 
     if ( inputFile.is_open() ) {
         inputFile >> inputString;
@@ -31,42 +36,97 @@ void AoC2015::Day1() {
     inputFile.close();
 
     cout << "Floor: " << iFloor << "\n";
-
-    iBasementPosition = day1.getBasementPosition();
-
-    cout << "Basement Position: " << iBasementPosition << "\n";
+    cout << "Basement Position: " << day1.getBasementPosition() << "\n\n";
 }
 
 void AoC2015::Day2() {
     string inputString;
     ifstream inputFile;
+
+    cout << "--- Day 2: I Was Told There Would Be No Math ---\n";
+
     inputFile.open(R"(./input_data/2015/day2_input.txt)");
 
-    int areaOfPaperNeeded = 0;
-    int lengthOfRibbonNeeded = 0;
-    int sumAreaOfPaperNeeded = 0;
-    int sumLengthOfRibbonNeeded = 0;
+    int iAreaOfPaperNeeded = 0;
+    int iLengthOfRibbonNeeded = 0;
+    int iSumAreaOfPaperNeeded = 0;
+    int iSumLengthOfRibbonNeeded = 0;
 
     if (inputFile.is_open()) {
         while (getline(inputFile, inputString)) {
             day2.calcMaterialsNeeded(inputString);
-            areaOfPaperNeeded = day2.getPresentPaper();
-            lengthOfRibbonNeeded = day2.getRibbonLength();
+            iAreaOfPaperNeeded = day2.getPresentPaper();
+            iLengthOfRibbonNeeded = day2.getRibbonLength();
 
-            if(areaOfPaperNeeded > 0) {
-                sumAreaOfPaperNeeded += areaOfPaperNeeded;
+            if(iAreaOfPaperNeeded > 0) {
+                iSumAreaOfPaperNeeded += iAreaOfPaperNeeded;
             }
-            if(lengthOfRibbonNeeded > 0) {
-                sumLengthOfRibbonNeeded += lengthOfRibbonNeeded;
+            if(iLengthOfRibbonNeeded > 0) {
+                iSumLengthOfRibbonNeeded += iLengthOfRibbonNeeded;
             }
         }
     }
 
     inputFile.close();
 
-    cout << "Square feet of present paper: " << sumAreaOfPaperNeeded << "\n";
-    cout << "Feet of ribbon needed: " << sumLengthOfRibbonNeeded << "\n";
+    cout << "Square feet of present paper: " << iSumAreaOfPaperNeeded << "\n";
+    cout << "Feet of ribbon needed: " << iSumLengthOfRibbonNeeded << "\n\n";
 
+}
+
+void AoC2015::Day3() {
+    string inputString;
+    string inputFileLocation = R"(./input_data/2015/day3_input.txt)";
+    ifstream inputFile;
+
+    cout << "--- Day 3: Perfectly Spherical Houses in a Vacuum ---\n";
+
+    inputFile.open(inputFileLocation);
+
+    unsigned int uiHousesVisitedSoloSanta = 0;
+    unsigned int uiPresentsDeliveredSoloSanta = 0;
+    unsigned int uiHousesVisitedWRoboSanta = 0;
+    unsigned int uiPresentsDeliveredWRoboSanta = 0;
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day3.deliveryDirections(inputString);
+        }
+
+        uiHousesVisitedSoloSanta = day3.getTotalHousesVisited();
+        uiPresentsDeliveredSoloSanta = day3.getTotalDeliveries();
+    }
+
+    inputFile.close();
+
+    cout << "Houses delivered to as Solo Santa: " << uiHousesVisitedSoloSanta << "\n";
+    cout << "Presents delivered as Solo Santa: " << uiPresentsDeliveredSoloSanta << "\n";
+
+    inputFile.open(inputFileLocation);
+
+    day3.activateRobot();
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day3.deliveryDirections(inputString);
+        }
+
+        uiHousesVisitedWRoboSanta = day3.getTotalHousesVisited();
+        uiPresentsDeliveredWRoboSanta = day3.getTotalDeliveries();
+    }
+
+    inputFile.close();
+
+    cout << "Houses delivered to with Robo Santa: " << uiHousesVisitedWRoboSanta << "\n";
+    cout << "Presents delivered with Robo Santa: " << uiPresentsDeliveredWRoboSanta << "\n\n";
+}
+
+void AoC2015::Day4() {
+    string inputString;
+    string inputFileLocation = R"(./input_data/2015/day4_input.txt)";
+    ifstream inputFile;
+
+    cout << "--- Day 4: The Ideal Stocking Stuffer ---\n";
 }
 
 string AoC2015::AoC2015GetVersion() {
