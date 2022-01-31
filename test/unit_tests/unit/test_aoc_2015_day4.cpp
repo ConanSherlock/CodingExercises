@@ -23,15 +23,18 @@ void test_aoc_day4_basic_input() {
 
     string inputString1 = "abcdef";
     string inputString2 = "pqrstuv";
-    string inputStringBadInput = "Bad Input";
-
-    // No input, no calc Check
-
 
     // Good input Check
+    int expectedIntCode = 609043;
+    int actualIntCode;
 
+    actualIntCode = day4.md5LeadingZeroes(inputString1, 5);
+    TEST_ASSERT_EQUAL(expectedIntCode, actualIntCode);
+    day4.reset();
 
-    // Bad input Check
+    expectedIntCode = 1048970;
+    actualIntCode = day4.md5LeadingZeroes(inputString2, 5);
+    TEST_ASSERT_EQUAL(expectedIntCode, actualIntCode);
 
 }
 
@@ -47,8 +50,19 @@ void test_aoc_day4_input_file() {
     string inputFileName = {"./input_data/2015/day4_input.txt"};
     inputFile.open(inputFileName);
 
+    int expectedIntCode1 = 346386;
+    int expectedIntCode2 = 9958218;
+    int actualIntCode;
+
     if (inputFile.is_open()) {
         while (getline(inputFile, inputString)) {
+
+            actualIntCode = day4.md5LeadingZeroes(inputString, 5);
+            day4.reset();
+            TEST_ASSERT_EQUAL(expectedIntCode1, actualIntCode);
+
+            actualIntCode = day4.md5LeadingZeroes(inputString, 6);
+            TEST_ASSERT_EQUAL(expectedIntCode2, actualIntCode);
 
         }
     }

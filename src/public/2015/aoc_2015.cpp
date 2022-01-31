@@ -125,8 +125,26 @@ void AoC2015::Day4() {
     string inputString;
     string inputFileLocation = R"(./input_data/2015/day4_input.txt)";
     ifstream inputFile;
+    int intCode;
 
     cout << "--- Day 4: The Ideal Stocking Stuffer ---\n";
+
+    inputFile.open(inputFileLocation);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            intCode = day4.md5LeadingZeroes(inputString, 5);
+            day4.reset();
+
+            cout << "Int Code for 5 Leading Zeroes: " << intCode;
+
+            intCode = day4.md5LeadingZeroes(inputString, 6);
+
+            cout << "Int Code for 6 Leading Zeroes: " << intCode;
+        }
+    }
+
+    inputFile.close();
 }
 
 string AoC2015::AoC2015GetVersion() {

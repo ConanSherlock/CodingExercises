@@ -8,12 +8,17 @@
 #include <string>
 #include <map>
 #include <iostream>
+#include <iomanip>
+#include "md5.h"
 
 using namespace std;
 
 /*!
     Class to implement the solution to AoC 2015 Day 4
 */
+
+#define MAX_DIGEST_LENGTH 16
+
 class AoC2015Day4 {
 public:
     /*!
@@ -22,10 +27,16 @@ public:
     AoC2015Day4();
     ~AoC2015Day4();
 
+    int md5LeadingZeroes(string &inputString, int leadingZeroes);
+    int getSecretCode() const;  //NOLINT
+    int getLeadingZeroes() const;  //NOLINT
+
     void reset();
 
 private:
-
+    bool bDebugPrint;
+    int iLeadingZeroCount;
+    uint32_t iIntCode;
 };
 
 #endif //CPP_AOC_2015_DAY4_H
