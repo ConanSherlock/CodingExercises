@@ -16,26 +16,40 @@ set(CMAKE_CXX_STANDARD 20)
 file(GLOB AOC_2015_SRC_FILES
         src/public/2015/*.cpp
         src/private/2015/*.cpp
+        src/private/utils/*.cpp
         )
 
 file(GLOB AOC_2015_HDR_PUBLIC
         inc/public/2015)
 file(GLOB AOC_2015_HDR_PRIVATE
-        inc/private/2015)
+        inc/private/2015
+        inc/private/utils)
 
-set(aoc_2015_lib_files ${AOC_2015_SRC_FILES})
-add_library(AoC2015Lib STATIC ${AOC_2015_SRC_FILES})
+file(GLOB EXTERNAL_SRC_FILES
+        external/md5/src/*.cpp
+        )
+
+file(GLOB EXTERNAL_HDR
+        external/md5/inc
+        )
+
+
+set(aoc_2015_lib_files ${AOC_2015_SRC_FILES} ${EXTERNAL_SRC_FILES})
+add_library(AoC2015Lib STATIC ${aoc_2015_lib_files})
 target_include_directories(AoC2015Lib
         PUBLIC
         ${AOC_2015_HDR_PUBLIC}
         PRIVATE
         ${AOC_2015_HDR_PRIVATE}
+        ${EXTERNAL_HDR}
         )
+
 
 ################################################ AOC2015 Executable ####################################################
 file(GLOB AOC_2015_EXE_SRC_FILES
         src/public/2015/*.cpp
         src/private/2015/*.cpp
+        src/private/utils/*.cpp
         src/exe/2015/*.cpp
         )
 
@@ -46,6 +60,7 @@ target_include_directories(AoC2015
         ${AOC_2015_HDR_PUBLIC}
         PRIVATE
         ${AOC_2015_HDR_PRIVATE}
+        ${EXTERNAL_HDR}
         )
 
 add_custom_command(TARGET AoC2015 PRE_BUILD
@@ -81,8 +96,9 @@ file(GLOB TEST_INTERNAL_HEADER_FILES
 set(TEST_INTERNAL_SOURCE_FILES ${INTERNAL_SOURCE_FILES})
 
 add_executable(AoC2015Test ${TEST_INTERNAL_SOURCE_FILES})
+target_link_libraries(AoC2015Test LINK_PRIVATE AoC2015Lib)
 target_link_libraries(AoC2015Test LINK_PUBLIC unity)
-target_link_libraries(AoC2015Test LINK_PUBLIC AoC2015Lib)
+
 target_include_directories(AoC2015Test
         PUBLIC
         ${UNITY_LIB_HEADER_FILES}
@@ -90,6 +106,7 @@ target_include_directories(AoC2015Test
 
         ${AOC_2015_HDR_PUBLIC}
         ${AOC_2015_HDR_PRIVATE}
+        ${EXTERNAL_HDR}
         )
 
 add_custom_command(TARGET AoC2015Test PRE_BUILD
