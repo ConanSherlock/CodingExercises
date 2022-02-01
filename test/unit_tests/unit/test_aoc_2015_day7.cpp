@@ -40,40 +40,79 @@ void test_aoc_day7_basic_input() {
 
     AoC2015Day7 day7;
 
-    istringstream inputString("123 -> x\n"
-                              "456 -> y\n"
-                              "x AND y -> d\n"
-                              "x OR y -> e\n"
-                              "x LSHIFT 2 -> f\n"
-                              "y RSHIFT 2 -> g\n"
-                              "NOT x -> h\n"
-                              "NOT y -> i");
+    istringstream goodInputString("123 -> x\n"
+                                  "456 -> y\n"
+                                  "x AND y -> d\n"
+                                  "x OR y -> e\n"
+                                  "x LSHIFT 2 -> f\n"
+                                  "y RSHIFT 2 -> g\n"
+                                  "NOT x -> h\n"
+                                  "NOT y -> i");
+
+    istringstream badInputString("0 -> x\n"
+                                 "0 -> x\n"
+                                 "x jhlk -> d\n"
+                                 "x asd -> e\n"
+                                 "asdsaf -> f\n"
+                                 "asdsaf asdasfasf asdasfsaf -> k\n"
+                                 "y RSHIFT 2 g\n"
+                                 "NOT y i");
     string line;
 
     // Good input Check
     multimap<string, int> expectedValues;
-    expectedValues.insert({"d", 72});
-    expectedValues.insert({"e", 507});
-    expectedValues.insert({"f", 492});
-    expectedValues.insert({"g", 114});
-    expectedValues.insert({"h", 65412});
-    expectedValues.insert({"i", 65079});
-    expectedValues.insert({"x", 123});
-    expectedValues.insert({"y", 456});
+    expectedValues.insert({"d", (uint16_t)72});
+    expectedValues.insert({"e", (uint16_t)507});
+    expectedValues.insert({"f", (uint16_t)492});
+    expectedValues.insert({"g", (uint16_t)114});
+    expectedValues.insert({"h", (uint16_t)65412});
+    expectedValues.insert({"i", (uint16_t)65079});
+    expectedValues.insert({"x", (uint16_t)123});
+    expectedValues.insert({"y", (uint16_t)456});
+
+    multimap<string, wireInfo> actualMap;
+    multimap<string, wireInfo> actualBadMap;
 
     multimap<string, int> actualValues;
 
-    while (std::getline(inputString, line)) {
+    while (std::getline(goodInputString, line)) {
         day7.buildCircuit(line);
     }
 
     day7.evaluateCircuit();
-//    TEST_ASSERT_EQUAL(expectedIntCode, actualIntCode);
+    actualMap = day7.getCircuitMap();
+
+    auto expectedIter = expectedValues.begin();
+
+    for (auto iter = actualMap.begin(); iter != actualMap.end(); iter++){
+        TEST_ASSERT_EQUAL(expectedIter->second, iter->second.value);
+        expectedIter++;
+    }
+
     day7.reset();
-//
-//    expectedIntCode = 1048970;
-//    actualIntCode = day4.md5LeadingZeroes(inputString2, 5);
-//    TEST_ASSERT_EQUAL(expectedIntCode, actualIntCode);
+
+    // Bad input Check
+
+    multimap<string, int> badExpectedValues;
+    badExpectedValues.insert({"d", (uint16_t)0});
+    badExpectedValues.insert({"e", (uint16_t)0});
+    badExpectedValues.insert({"f", (uint16_t)0});
+    badExpectedValues.insert({"k", (uint16_t)0});
+    badExpectedValues.insert({"x", (uint16_t)0});
+
+    while (std::getline(badInputString, line)) {
+        day7.buildCircuit(line);
+    }
+
+    day7.evaluateCircuit();
+    actualBadMap = day7.getCircuitMap();
+
+    expectedIter = badExpectedValues.begin();
+
+    for (auto iter = actualBadMap.begin(); iter != actualBadMap.end(); iter++){
+        TEST_ASSERT_EQUAL(expectedIter->second, iter->second.value);
+        expectedIter++;
+    }
 
 }
 
@@ -85,15 +124,20 @@ void test_aoc_day7_input_file() {
 
     string inputString;
     ifstream inputFile;
+    multimap<string, wireInfo> circuitMap1;
+    multimap<string, wireInfo> circuitMap2;
+    string expectedKey = "a";
+    uint16_t expectedValue1 = 16076;
+    uint16_t expectedValue2 = 2797;
+    uint16_t actualValue = 0;
+    string keyToChange = "b";
+    wireInfo newInfo;
+    newInfo.equation = to_string(16076);
+    newInfo.evaluated = false;
+    newInfo.value = 0;
 
     string inputFileName = {"./input_data/2015/day7_input.txt"};
     inputFile.open(inputFileName);
-
-    int expectedIntCode1 = 346386;
-    int expectedIntCode2 = 9958218;
-    int actualIntCode;
-
-    stringstream fileContent;
 
     if (inputFile.is_open()) {
         while (getline(inputFile, inputString)) {
@@ -101,6 +145,45 @@ void test_aoc_day7_input_file() {
         }
         day7.evaluateCircuit();
     }
+
+    circuitMap1 = day7.getCircuitMap();
+
+    for (auto & entry : circuitMap1) {
+        if(expectedKey == entry.first){
+            actualValue = entry.second.value;
+            break;
+        }
+    }
+
+    TEST_ASSERT_EQUAL(expectedValue1, actualValue);
+
+    day7.reset();
+
+    inputFile.clear();
+    inputFile.seekg(0, std::ifstream::beg);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day7.buildCircuit(inputString);
+        }
+    }
+
+    day7.changeWireInfo(keyToChange, newInfo);
+
+    day7.evaluateCircuit();
+
+    circuitMap2 = day7.getCircuitMap();
+
+    actualValue = 0;
+
+    for (auto & entry : circuitMap2) {
+        if(expectedKey == entry.first){
+            actualValue = entry.second.value;
+            break;
+        }
+    }
+
+    TEST_ASSERT_EQUAL(expectedValue2, actualValue);
 
     inputFile.close();
 }
