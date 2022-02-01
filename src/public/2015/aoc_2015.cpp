@@ -136,11 +136,31 @@ void AoC2015::Day4() {
             intCode = day4.md5LeadingZeroes(inputString, 5);
             day4.reset();
 
-            cout << "Int Code for 5 Leading Zeroes: " << intCode;
+            cout << "Int Code for 5 Leading Zeroes: " << intCode << "\n";
 
             intCode = day4.md5LeadingZeroes(inputString, 6);
 
-            cout << "Int Code for 6 Leading Zeroes: " << intCode;
+            cout << "Int Code for 6 Leading Zeroes: " << intCode << "\n";
+        }
+    }
+
+    inputFile.close();
+}
+
+void AoC2015::Day7() {
+    string inputString;
+    string inputFileLocation = R"(./input_data/2015/day7_input.txt)";
+    ifstream inputFile;
+
+    cout << "--- Day 7: Some Assembly Required ---\n";
+
+    inputFile.open(inputFileLocation);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+//            intCode = day4.md5LeadingZeroes(inputString, 5);
+//            day4.reset();
+
         }
     }
 

@@ -53,10 +53,16 @@ public:
     void Day3();
 
     /*!
-        Function to print the solution to Day 3.
+        Function to print the solution to Day 4.
         \return void
     */
     void Day4();
+
+    /*!
+        Function to print the solution to Day 7.
+        \return void
+    */
+    void Day7();
 
     /*!
         Retrieves the version number of the 2015 implementation.
