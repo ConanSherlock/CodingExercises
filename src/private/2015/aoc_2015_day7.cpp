@@ -83,16 +83,30 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
 
             sExpressionPart3 = wI_InputWireInfo.equation;
 
-            if(mmssWireMap.count(sExpressionPart1) == 0){
-                wireInfo TempWire1Info;
-
-                for(char digit : sExpressionPart1){
-                    if(!isdigit(digit)){
+            // Check for possible invalid strings moved these checks here to avoid possible accessing memory outside
+            // its scope
+            if(mmssWireMap.count(sExpressionPart1) == 0) {
+                for (char digit: sExpressionPart1) {
+                    if (!isdigit(digit)) {
                         // Invalid string check exiting function
                         return;
                     }
                 }
+            }
 
+            // Check for possible invalid strings moved these checks here to avoid possible accessing memory outside
+            // its scope
+            if(mmssWireMap.count(sExpressionPart3) == 0) {
+                for (char digit: sExpressionPart3) {
+                    if (!isdigit(digit)) {
+                        // Invalid string check exiting function
+                        return;
+                    }
+                }
+            }
+
+            if(mmssWireMap.count(sExpressionPart1) == 0){
+                wireInfo TempWire1Info;
                 TempWire1Info.value = stoi(sExpressionPart1);
                 TempWire1Info.evaluated = true;
                 pwI_TempWire1Info = &TempWire1Info;
@@ -102,14 +116,6 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
 
             if(mmssWireMap.count(sExpressionPart3) == 0){
                 wireInfo TempWire2Info;
-
-                for(char digit : sExpressionPart3){
-                    if(!isdigit(digit)){
-                        // Invalid string check exiting function
-                        return;
-                    }
-                }
-
                 TempWire2Info.value = stoi(sExpressionPart3);
                 TempWire2Info.evaluated = true;
                 pwI_TempWire2Info = &TempWire2Info;
