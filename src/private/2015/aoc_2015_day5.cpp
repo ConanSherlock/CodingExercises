@@ -8,6 +8,7 @@ AoC2015Day5::AoC2015Day5() {
     bVowelsFound = false;
     bRepeatLetterFound = false;
     bForbiddenStringFound = false;
+    bTwoLettersFoundTwice = false;
     u32NiceCount = 0;
     beh_Behaviour = UNKNOWN;
 }
@@ -16,11 +17,12 @@ void AoC2015Day5::reset() {
     bVowelsFound = false;
     bRepeatLetterFound = false;
     bForbiddenStringFound = false;
+    bTwoLettersFoundTwice = false;
     u32NiceCount = 0;
     beh_Behaviour = UNKNOWN;
 }
 
-behaviour AoC2015Day5::checkNaughtyOrNice(string &sInputString) {
+behaviour AoC2015Day5::checkNaughtyOrNiceV1(string &sInputString) {
     size_t badStringPosition;
     int vowelsFound = 0;
     bVowelsFound = false;
@@ -69,7 +71,44 @@ behaviour AoC2015Day5::checkNaughtyOrNice(string &sInputString) {
     return beh_Behaviour;
 }
 
-uint32_t AoC2015Day5::getNiceCount() {
+behaviour AoC2015Day5::checkNaughtyOrNiceV2(string &sInputString) {
+    size_t stringPosition;
+    string tempSubstring;
+    bVowelsFound = false;
+    bRepeatLetterFound = false;
+    bTwoLettersFoundTwice = false;
+
+    for(uint32_t i = 0; i<sInputString.length(); i++){
+        if(i+2<sInputString.length()) {
+            tempSubstring = sInputString.substr(i, 2);
+            stringPosition = sInputString.find(tempSubstring, i + 2);
+            if (stringPosition >= i+2 && stringPosition != SIZE_MAX){
+                cout << tempSubstring << "\n";
+                bTwoLettersFoundTwice = true;
+            }
+        }
+
+        if(i+1<sInputString.length() && !bRepeatLetterFound){
+            if(sInputString[i] == sInputString[i+2]){
+                tempSubstring = sInputString.substr(i, 3);
+                cout << tempSubstring << "\n";
+                bRepeatLetterFound=true;
+            }
+        }
+    }
+
+    if(bTwoLettersFoundTwice && bRepeatLetterFound){
+        beh_Behaviour = NICE;
+        u32NiceCount++;
+    } else{
+        beh_Behaviour = NAUGHTY;
+    }
+
+    return beh_Behaviour;
+}
+
+
+uint32_t AoC2015Day5::getNiceCount() const {
     return u32NiceCount;
 }
 

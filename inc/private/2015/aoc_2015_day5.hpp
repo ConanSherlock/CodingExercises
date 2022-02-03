@@ -39,17 +39,19 @@ public:
     */
     void reset();
 
-    behaviour checkNaughtyOrNice(string &sInputString);
+    behaviour checkNaughtyOrNiceV1(string &sInputString);
 
-    uint32_t getNiceCount();
+    behaviour checkNaughtyOrNiceV2(string &sInputString);
+
+    uint32_t getNiceCount() const;          // NOLINT
 
 private:
     bool bVowelsFound;
     bool bRepeatLetterFound;
     bool bForbiddenStringFound;
+    bool bTwoLettersFoundTwice;
     uint32_t u32NiceCount;
     behaviour beh_Behaviour;
-
 };
 
 #endif //CPP_AOC_2015_DAY5_H
