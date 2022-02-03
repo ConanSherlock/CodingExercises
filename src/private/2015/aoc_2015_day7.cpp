@@ -70,7 +70,7 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
             if (!pwI_TempWire1Info->evaluated){
                 evaluateWire(*pwI_TempWire1Info);
             }
-            NotOperation(pwI_TempWire1Info, wI_InputWireInfo);
+            notOperation(pwI_TempWire1Info, wI_InputWireInfo);
         } else{
             if ((stPos = wI_InputWireInfo.equation.find(sDeliminator)) != std::string::npos)
             {
@@ -131,13 +131,13 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
             }
 
             if(sExpressionPart2 == OPERATOR_AND){
-                AndOperation(pwI_TempWire1Info, pwI_TempWire2Info, wI_InputWireInfo);
+                andOperation(pwI_TempWire1Info, pwI_TempWire2Info, wI_InputWireInfo);
             } else if(sExpressionPart2 == OPERATOR_OR){
-                OrOperation(pwI_TempWire1Info, pwI_TempWire2Info, wI_InputWireInfo);
+                orOperation(pwI_TempWire1Info, pwI_TempWire2Info, wI_InputWireInfo);
             } else if(sExpressionPart2 == OPERATOR_LSHIFT){
-                LShiftOperation(pwI_TempWire1Info, pwI_TempWire2Info, wI_InputWireInfo);
+                lShiftOperation(pwI_TempWire1Info, pwI_TempWire2Info, wI_InputWireInfo);
             } else if(sExpressionPart2 == OPERATOR_RSHIFT){
-                RShiftOperation(pwI_TempWire1Info, pwI_TempWire2Info, wI_InputWireInfo);
+                rShiftOperation(pwI_TempWire1Info, pwI_TempWire2Info, wI_InputWireInfo);
             }
         }
     } else{
@@ -167,27 +167,27 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
     }
 }
 
-void AoC2015Day7::NotOperation(wireInfo *wI_InputWire, wireInfo &wI_OutputWire){
+void AoC2015Day7::notOperation(wireInfo *wI_InputWire, wireInfo &wI_OutputWire){
     wI_OutputWire.value = ~wI_InputWire->value;
     wI_OutputWire.evaluated = true;
 }
 
-void AoC2015Day7::AndOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire){
+void AoC2015Day7::andOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire){
     wI_OutputWire.value = wI_InputWire1->value & wI_InputWire2->value;
     wI_OutputWire.evaluated = true;
 }
 
-void AoC2015Day7::OrOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire){
+void AoC2015Day7::orOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire){
     wI_OutputWire.value = wI_InputWire1->value | wI_InputWire2->value;
     wI_OutputWire.evaluated = true;
 }
 
-void AoC2015Day7::LShiftOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire){
+void AoC2015Day7::lShiftOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire){
     wI_OutputWire.value = wI_InputWire1->value << wI_InputWire2->value;
     wI_OutputWire.evaluated = true;
 }
 
-void AoC2015Day7::RShiftOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire){
+void AoC2015Day7::rShiftOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire){
     wI_OutputWire.value = wI_InputWire1->value >> wI_InputWire2->value;
     wI_OutputWire.evaluated = true;
 }
