@@ -69,7 +69,7 @@ void test_aoc_day5_p2_basic_input() {
 
 void test_aoc_day5_input_file() {
 
-    // Test using the original input file with expected correct answers for Day 7
+    // Test using the original input file with expected correct answers for Day 5
 
     AoC2015Day5 day5;
 
@@ -95,13 +95,13 @@ void test_aoc_day5_input_file() {
 
 void test_aoc_day5_p2_input_file() {
 
-    // Test using the original input file with expected correct answers for Day 7
+    // Test using the original input file with expected correct answers for Day 5
 
     AoC2015Day5 day5;
 
     string inputString;
     ifstream inputFile;
-    uint32_t expectedNiceCount = 238;
+    uint32_t expectedNiceCount = 69;
     uint32_t actualNiceCount;
 
     string inputFileName = {"./input_data/2015/day5_input.txt"};
@@ -126,9 +126,9 @@ void test_aoc_day5_p2_input_file() {
 
 void test_aoc2015_day5(bool printTest) {
     if (!printTest) {
-//        RUN_TEST(test_aoc_day5_basic_input);
+        RUN_TEST(test_aoc_day5_basic_input);
         RUN_TEST(test_aoc_day5_p2_basic_input);
-//        RUN_TEST(test_aoc_day5_input_file);
+        RUN_TEST(test_aoc_day5_input_file);
         RUN_TEST(test_aoc_day5_p2_input_file);
     } else {
         printf("%s\n", "test_aoc_day5_basic_input");

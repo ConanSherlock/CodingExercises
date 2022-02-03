@@ -39,10 +39,22 @@ public:
     */
     void reset();
 
+    /*!
+        Function to calculate if a string is naughty or nice based on the part a criteria
+        \return behaviour Value signifying the behaviour of the string
+    */
     behaviour checkNaughtyOrNiceV1(string &sInputString);
 
+    /*!
+        Function to calculate if a string is naughty or nice based on the part b criteria
+        \return behaviour Value signifying the behaviour of the string
+    */
     behaviour checkNaughtyOrNiceV2(string &sInputString);
 
+    /*!
+        Function to return the number of Nice strings found
+        \return uint32_t Value of the amount of nice strings found
+    */
     uint32_t getNiceCount() const;          // NOLINT
 
 private:

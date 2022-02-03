@@ -83,15 +83,12 @@ behaviour AoC2015Day5::checkNaughtyOrNiceV2(string &sInputString) {
             tempSubstring = sInputString.substr(i, 2);
             stringPosition = sInputString.find(tempSubstring, i + 2);
             if (stringPosition >= i+2 && stringPosition != SIZE_MAX){
-                cout << tempSubstring << "\n";
                 bTwoLettersFoundTwice = true;
             }
         }
 
         if(i+1<sInputString.length() && !bRepeatLetterFound){
             if(sInputString[i] == sInputString[i+2]){
-                tempSubstring = sInputString.substr(i, 3);
-                cout << tempSubstring << "\n";
                 bRepeatLetterFound=true;
             }
         }
