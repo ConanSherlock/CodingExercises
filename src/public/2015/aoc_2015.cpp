@@ -6,6 +6,7 @@ AoC2015::AoC2015(){
     day1.reset();
     day2.reset();
     day3.reset();
+    day7.reset();
 }
 
 AoC2015::~AoC2015() = default;
@@ -15,6 +16,7 @@ void AoC2015::reset(){
     day2.reset();
     day3.reset();
     day4.reset();
+    day7.reset();
 }
 
 void AoC2015::Day1() {
@@ -136,13 +138,78 @@ void AoC2015::Day4() {
             intCode = day4.md5LeadingZeroes(inputString, 5);
             day4.reset();
 
-            cout << "Int Code for 5 Leading Zeroes: " << intCode;
+            cout << "Int Code for 5 Leading Zeroes: " << intCode << "\n";
 
             intCode = day4.md5LeadingZeroes(inputString, 6);
 
-            cout << "Int Code for 6 Leading Zeroes: " << intCode;
+            cout << "Int Code for 6 Leading Zeroes: " << intCode << "\n\n";
         }
     }
+
+    inputFile.close();
+}
+
+void AoC2015::Day7() {
+    string inputString;
+    string inputFileLocation = R"(./input_data/2015/day7_input.txt)";
+    ifstream inputFile;
+    multimap<string, wireInfo> circuitMap;
+    string wireA = "a";
+    string wireB = "b";
+    wireInfo newWireBInfo;
+    newWireBInfo.equation = "";
+    newWireBInfo.evaluated = false;
+    newWireBInfo.value = 0;
+    uint16_t wireAValue = 0;
+
+    cout << "--- Day 7: Some Assembly Required ---\n";
+
+    inputFile.open(inputFileLocation);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day7.buildCircuit(inputString);
+        }
+        day7.evaluateCircuit();
+    }
+
+    circuitMap = day7.getCircuitMap();
+
+    for (auto & entry : circuitMap) {
+        if(wireA == entry.first){
+            wireAValue = entry.second.value;
+            break;
+        }
+    }
+
+    cout << "Value of wire A in part 1: " << wireAValue << "\n";
+
+    newWireBInfo.equation = to_string(wireAValue);
+
+    day7.reset();
+
+    inputFile.clear();
+    inputFile.seekg(0, std::ifstream::beg);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day7.buildCircuit(inputString);
+        }
+    }
+
+    day7.changeWireInfo(wireB, newWireBInfo);
+    day7.evaluateCircuit();
+    circuitMap.clear();
+    circuitMap = day7.getCircuitMap();
+
+    for (auto & entry : circuitMap) {
+        if(wireA == entry.first){
+            wireAValue = entry.second.value;
+            break;
+        }
+    }
+
+    cout << "Value of wire A in part 2: " << wireAValue << "\n\n";
 
     inputFile.close();
 }

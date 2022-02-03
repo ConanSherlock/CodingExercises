@@ -39,7 +39,7 @@ public:
         Function to find the floor Santa is on based on an input string.
         \return int Floor number
     */
-    int findFloor(string &inputString);
+    int findFloor(string &sInputString);
 
     /*!
         Function to find the position of the character that first puts Santa in the basement which is -1 by

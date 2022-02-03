@@ -16,12 +16,12 @@ void AoC2015Day4::reset() {
     iIntCode=0;
 }
 
-int AoC2015Day4::md5LeadingZeroes(string &inputString, int leadingZeroes) {
+int AoC2015Day4::md5LeadingZeroes(string &sInputString, int iLeadingZeroes) {
     string md5Input;
     const byte *digest;
 
     for (uint32_t i = 1; i < UINT32_MAX; i++) {
-        md5Input = inputString + to_string(i);
+        md5Input = sInputString + to_string(i);
 
         if(bDebugPrint) {
             cout << md5Input << "\n";
@@ -52,7 +52,7 @@ int AoC2015Day4::md5LeadingZeroes(string &inputString, int leadingZeroes) {
             }
         }
 
-        if (iLeadingZeroCount >= leadingZeroes) {
+        if (iLeadingZeroCount >= iLeadingZeroes) {
             break;
         } else {
             iLeadingZeroCount = 0;
