@@ -36,7 +36,32 @@ void test_aoc_day5_basic_input() {
     behaviour actualBehaviour;
 
     for(pair<string, behaviour> pInputOutputPair: inputStringsToExpectedBehaviours) {
-        actualBehaviour = day5.checkNaughtyOrNice(pInputOutputPair.first);
+        actualBehaviour = day5.checkNaughtyOrNiceV1(pInputOutputPair.first);
+        day5.reset();
+        TEST_ASSERT_EQUAL(pInputOutputPair.second, actualBehaviour);
+    }
+}
+
+void test_aoc_day5_p2_basic_input() {
+    // qjhvhtzxzqqjkmpb is nice because is has a pair that appears twice (qj) and a letter that repeats with exactly
+    //     one letter between them (zxz).
+    // xxyxx is nice because it has a pair that appears twice and a letter that repeats with one between, even though
+    //     the letters used by each rule overlap.
+    // uurcxstgmygtbstg is naughty because it has a pair (tg) but no repeat with a single letter between them.
+    // ieodomkazucvgmuy is naughty because it has a repeating letter with one between (odo), but no pair that appears twice.
+
+
+    AoC2015Day5 day5;
+
+    pair<string, behaviour> inputStringsToExpectedBehaviours[4] = {{"qjhvhtzxzqqjkmpb", NICE},
+                                                                   {"xxyxx", NICE},
+                                                                   {"uurcxstgmygtbstg", NAUGHTY},
+                                                                   {"ieodomkazucvgmuy", NAUGHTY}};
+    behaviour actualBehaviour;
+
+    for(pair<string, behaviour> pInputOutputPair: inputStringsToExpectedBehaviours) {
+        cout << pInputOutputPair.first << "\n";
+        actualBehaviour = day5.checkNaughtyOrNiceV2(pInputOutputPair.first);
         day5.reset();
         TEST_ASSERT_EQUAL(pInputOutputPair.second, actualBehaviour);
     }
@@ -50,7 +75,7 @@ void test_aoc_day5_input_file() {
 
     string inputString;
     ifstream inputFile;
-    uint32_t expectedNiceCount = 0;
+    uint32_t expectedNiceCount = 238;
     uint32_t actualNiceCount;
 
     string inputFileName = {"./input_data/2015/day5_input.txt"};
@@ -58,7 +83,7 @@ void test_aoc_day5_input_file() {
 
     if (inputFile.is_open()) {
         while (getline(inputFile, inputString)) {
-            day5.checkNaughtyOrNice(inputString);
+            day5.checkNaughtyOrNiceV1(inputString);
         }
     }
 
@@ -68,17 +93,48 @@ void test_aoc_day5_input_file() {
     inputFile.close();
 }
 
+void test_aoc_day5_p2_input_file() {
+
+    // Test using the original input file with expected correct answers for Day 7
+
+    AoC2015Day5 day5;
+
+    string inputString;
+    ifstream inputFile;
+    uint32_t expectedNiceCount = 238;
+    uint32_t actualNiceCount;
+
+    string inputFileName = {"./input_data/2015/day5_input.txt"};
+    inputFile.open(inputFileName);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day5.checkNaughtyOrNiceV2(inputString);
+        }
+    }
+
+    actualNiceCount = day5.getNiceCount();
+    TEST_ASSERT_EQUAL(expectedNiceCount, actualNiceCount);
+
+    inputFile.close();
+}
+
+
 /** ***************************************** Private Function Definitions *********************************************/
 
 /** ***************************************** Amalgamation of Test Cases **********************************************/
 
 void test_aoc2015_day5(bool printTest) {
     if (!printTest) {
-        RUN_TEST(test_aoc_day5_basic_input);
-        RUN_TEST(test_aoc_day5_input_file);
+//        RUN_TEST(test_aoc_day5_basic_input);
+        RUN_TEST(test_aoc_day5_p2_basic_input);
+//        RUN_TEST(test_aoc_day5_input_file);
+        RUN_TEST(test_aoc_day5_p2_input_file);
     } else {
         printf("%s\n", "test_aoc_day5_basic_input");
+        printf("%s\n", "test_aoc_day5_p2_basic_input");
         printf("%s\n", "test_aoc_day5_input_file");
+        printf("%s\n", "test_aoc_day5_p2_input_file");
     }
 }
 
