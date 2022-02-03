@@ -60,7 +60,6 @@ void test_aoc_day5_p2_basic_input() {
     behaviour actualBehaviour;
 
     for(pair<string, behaviour> pInputOutputPair: inputStringsToExpectedBehaviours) {
-        cout << pInputOutputPair.first << "\n";
         actualBehaviour = day5.checkNaughtyOrNiceV2(pInputOutputPair.first);
         day5.reset();
         TEST_ASSERT_EQUAL(pInputOutputPair.second, actualBehaviour);

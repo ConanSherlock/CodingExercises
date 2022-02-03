@@ -80,15 +80,15 @@ behaviour AoC2015Day5::checkNaughtyOrNiceV2(string &sInputString) {
 
     for(uint32_t i = 0; i<sInputString.length(); i++){
         if(i+2<sInputString.length()) {
-            tempSubstring = sInputString.substr(i, 2);
-            stringPosition = sInputString.find(tempSubstring, i + 2);
-            if (stringPosition >= i+2 && stringPosition != SIZE_MAX){
+            tempSubstring = sInputString.substr(i, SUBSTRING_SIZE);
+            stringPosition = sInputString.find(tempSubstring, i + SUBSTRING_SIZE);
+            if (stringPosition >= i+SUBSTRING_SIZE && stringPosition != SIZE_MAX){
                 bTwoLettersFoundTwice = true;
             }
         }
 
         if(i+1<sInputString.length() && !bRepeatLetterFound){
-            if(sInputString[i] == sInputString[i+2]){
+            if(sInputString[i] == sInputString[i+DISPLACEMENT_TO_NEXT_CHAR]){
                 bRepeatLetterFound=true;
             }
         }
