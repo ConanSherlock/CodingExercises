@@ -104,31 +104,31 @@ private:
         Function to implement the Not Operation and set the wire as evaluated
         \return void
     */
-    static void NotOperation(wireInfo *wI_InputWire, wireInfo &wI_OutputWire);
+    static void notOperation(wireInfo *wI_InputWire, wireInfo &wI_OutputWire);
 
     /*!
         Function to implement the And Operation and set the wire as evaluated
         \return void
     */
-    static void AndOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire);
+    static void andOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire);
 
     /*!
         Function to implement the Or Operation and set the wire as evaluated
         \return void
     */
-    static void OrOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire);
+    static void orOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire);
 
     /*!
         Function to implement the LShift Operation and set the wire as evaluated
         \return void
     */
-    static void LShiftOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire);
+    static void lShiftOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire);
 
     /*!
         Function to implement the RShift Operation and set the wire as evaluated
         \return void
     */
-    static void RShiftOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire);
+    static void rShiftOperation(wireInfo *wI_InputWire1, wireInfo *wI_InputWire2, wireInfo &wI_OutputWire);
 
     vector<string> svecCircuitComponent;
     multimap<string, wireInfo> mmssWireMap;
