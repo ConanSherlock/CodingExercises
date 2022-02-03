@@ -10,7 +10,7 @@ AoC2015Day2::AoC2015Day2() {
     rgxRegExDimensionInput = (R"((\d+)x(\d+)x(\d+))");
 }
 
-void AoC2015Day2::calcMaterialsNeeded(string &inputString) {
+void AoC2015Day2::calcMaterialsNeeded(string &sInputString) {
     smatch digitMatch;
     vector<int> ivecAreaOfSides;
     vector<int> ivecDimensions;
@@ -19,8 +19,8 @@ void AoC2015Day2::calcMaterialsNeeded(string &inputString) {
     int iTempArea2;
     int iTempArea3;
 
-    if(regex_match(inputString, rgxRegExDimensionInput)){
-        regex_search(inputString, digitMatch, rgxRegExDimensionInput);
+    if(regex_match(sInputString, rgxRegExDimensionInput)){
+        regex_search(sInputString, digitMatch, rgxRegExDimensionInput);
 
         iLength = stoi(digitMatch.str(LENGTH_POSITION));
         iWidth = stoi(digitMatch.str(WIDTH_POSITION));

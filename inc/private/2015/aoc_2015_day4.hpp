@@ -27,7 +27,7 @@ public:
     AoC2015Day4();
     ~AoC2015Day4();
 
-    int md5LeadingZeroes(string &inputString, int leadingZeroes);
+    int md5LeadingZeroes(string &sInputString, int iLeadingZeroes);
     int getSecretCode() const;  //NOLINT
     int getLeadingZeroes() const;  //NOLINT
 

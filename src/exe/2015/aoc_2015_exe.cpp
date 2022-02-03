@@ -12,6 +12,7 @@ int main() {
     aoc2015.Day2();
     aoc2015.Day3();
     aoc2015.Day4();
+    aoc2015.Day7();
 
     aoc2015.reset();
 
