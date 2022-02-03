@@ -13,6 +13,8 @@ using namespace std;
 #define VOWELS {"a", "e", "i", "o", "u"}
 #define FORBIDDEN_SUBSTRINGS {"ab", "cd", "pq", "xy"}
 #define REQUIRED_VOWELS 3
+#define SUBSTRING_SIZE 2
+#define DISPLACEMENT_TO_NEXT_CHAR 2
 
 typedef enum behaviour {
     UNKNOWN = -1,
