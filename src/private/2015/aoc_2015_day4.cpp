@@ -16,7 +16,7 @@ void AoC2015Day4::reset() {
     iIntCode=0;
 }
 
-int AoC2015Day4::md5LeadingZeroes(string &inputString, int leadingZeroes) {
+uint32_t AoC2015Day4::md5LeadingZeroes(string &inputString, int leadingZeroes) {
     string md5Input;
     const byte *digest;
 
@@ -63,7 +63,7 @@ int AoC2015Day4::md5LeadingZeroes(string &inputString, int leadingZeroes) {
     return iIntCode;
 }
 
-int AoC2015Day4::getSecretCode() const {
+uint32_t AoC2015Day4::getSecretCode() const {
     return iIntCode;
 }
 
