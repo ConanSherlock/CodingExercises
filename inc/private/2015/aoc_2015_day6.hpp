@@ -17,9 +17,8 @@
 #define TOGGLE_INCREASE 2
 #define TURN_CHANGE 1
 
-enum matchPosition
+enum lightMatchPosition
 {
-    FULL_MATCH_POSITION = 0,
     OFF_ON_POSITION = 1,
     START_X_POSITION = 2,
     START_Y_POSITION = 3,

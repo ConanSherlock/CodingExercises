@@ -11,6 +11,7 @@
 #include "aoc_2015_day3.hpp"
 #include "aoc_2015_day4.hpp"
 #include "aoc_2015_day5.hpp"
+#include "aoc_2015_day6.hpp"
 #include "aoc_2015_day7.hpp"
 #include "aoc_2015_version.hpp"
 
@@ -61,10 +62,16 @@ public:
     void Day4();
 
     /*!
-    Function to print the solution to Day 5.
-    \return void
-*/
+        Function to print the solution to Day 5.
+        \return void
+    */
     void Day5();
+
+    /*!
+        Function to print the solution to Day 6.
+        \return void
+    */
+    void Day6();
 
     /*!
         Function to print the solution to Day 7.
@@ -83,6 +90,7 @@ private:
     AoC2015Day3 day3;
     AoC2015Day4 day4;
     AoC2015Day5 day5;
+    AoC2015Day6 day6;
     AoC2015Day7 day7;
 };
 

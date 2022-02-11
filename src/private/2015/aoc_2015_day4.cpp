@@ -7,13 +7,13 @@
 AoC2015Day4::AoC2015Day4() {
     bDebugPrint = false;
     iLeadingZeroCount=0;
-    iIntCode=0;
+    ui32IntCode=0;
 }
 
 void AoC2015Day4::reset() {
     bDebugPrint = false;
     iLeadingZeroCount=0;
-    iIntCode=0;
+    ui32IntCode=0;
 }
 
 uint32_t AoC2015Day4::md5LeadingZeroes(string &sInputString, int iLeadingZeroes) {
@@ -44,10 +44,10 @@ uint32_t AoC2015Day4::md5LeadingZeroes(string &sInputString, int iLeadingZeroes)
                 iLeadingZeroCount += 2;
             } else if (digest[j] < 10) {
                 iLeadingZeroCount++;
-                iIntCode = i;
+                ui32IntCode = i;
                 break;
             } else {
-                iIntCode = i;
+                ui32IntCode = i;
                 break;
             }
         }
@@ -56,15 +56,15 @@ uint32_t AoC2015Day4::md5LeadingZeroes(string &sInputString, int iLeadingZeroes)
             break;
         } else {
             iLeadingZeroCount = 0;
-            iIntCode= 0;
+            ui32IntCode= 0;
         }
     }
 
-    return iIntCode;
+    return ui32IntCode;
 }
 
 uint32_t AoC2015Day4::getSecretCode() const {
-    return iIntCode;
+    return ui32IntCode;
 }
 
 int AoC2015Day4::getLeadingZeroes() const {
