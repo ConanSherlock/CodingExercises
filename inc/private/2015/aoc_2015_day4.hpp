@@ -27,7 +27,7 @@ public:
     AoC2015Day4();
     ~AoC2015Day4();
 
-    uint32_t md5LeadingZeroes(string &inputString, int leadingZeroes);
+    uint32_t md5LeadingZeroes(string &sInputString, int iLeadingZeroes);
     uint32_t getSecretCode() const;  //NOLINT
     int getLeadingZeroes() const;  //NOLINT
 

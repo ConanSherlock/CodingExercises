@@ -5,7 +5,7 @@
 #ifndef CPP_SANTA_2015_H
 #define CPP_SANTA_2015_H
 
-enum move_house
+enum moveHouse
 {
     NORTH = '^',
     SOUTH = 'v',

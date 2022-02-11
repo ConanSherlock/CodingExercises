@@ -15,8 +15,8 @@ AoC2015Day1::AoC2015Day1() {
     iLoopCount = 0;
 }
 
-int AoC2015Day1::findFloor(string &inputString) {
-    for(char i : inputString){
+int AoC2015Day1::findFloor(string &sInputString) {
+    for(char i : sInputString){
         if(i == '('){
             iFloorNumber++;
         } else if (i == ')'){
