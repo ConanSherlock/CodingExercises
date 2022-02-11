@@ -17,13 +17,15 @@ file(GLOB AOC_2015_SRC_FILES
         src/public/2015/*.cpp
         src/private/2015/*.cpp
         src/private/utils/*.cpp
+        src/private/template/*.cpp
         )
 
 file(GLOB AOC_2015_HDR_PUBLIC
         inc/public/2015)
 file(GLOB AOC_2015_HDR_PRIVATE
         inc/private/2015
-        inc/private/utils)
+        inc/private/utils
+        inc/private/template)
 
 file(GLOB EXTERNAL_SRC_FILES
         external/md5/src/*.cpp
@@ -55,6 +57,8 @@ file(GLOB AOC_2015_EXE_SRC_FILES
 
 set(aoc_2015_exe_files ${AOC_2015_EXE_SRC_FILES})
 add_executable(AoC2015 ${AOC_2015_EXE_SRC_FILES})
+
+target_link_libraries(AoC2015 LINK_PRIVATE AoC2015Lib)
 target_include_directories(AoC2015
         PUBLIC
         ${AOC_2015_HDR_PUBLIC}

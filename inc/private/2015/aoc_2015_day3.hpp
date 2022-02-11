@@ -29,7 +29,7 @@ public:
         Function to take in the delivery directions and send them to Santa or Robot Santa
         \return void
     */
-    void deliveryDirections(string &inputString);
+    void deliveryDirections(string &sInputString);
 
     /*!
         Function to return the total amount of presents delivered to all houses
@@ -67,23 +67,23 @@ private:
         Function to convert the coordinates of Santa or Robo sant to a string to be used as a map key
         \return string
     */
-    string convertCordsToStringKey(bool robo) const;        // NOLINT
+    string convertCordsToStringKey(bool bRobo) const;        // NOLINT
 
     /*!
         Function to convert the coordinates of Santa or Robo sant to a string to be used as a map key
         \return void
     */
-    void updateMap(bool robo);
+    void updateMap(bool bRobo);
 
     /*!
-        Function to update the coordinates of Santa and deliver a present, returns a bool if input is not valid
+        Function to update the coordinates of Santa and deliver a present, returns a bool if cInput is not valid
         \return void
     */
-    void updateSantaPosition(char input);
+    void updateSantaPosition(char cInput);
 
     Santa2015 Santa;
     Santa2015 RoboSanta;
-    int uiTotalDeliveries;
+    int iTotalDeliveries;
     bool bRobotActivated;
     bool bRobotDelivered;
     unsigned int uiTotalHousesVisited;

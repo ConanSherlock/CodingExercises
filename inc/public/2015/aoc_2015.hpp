@@ -10,6 +10,8 @@
 #include "aoc_2015_day2.hpp"
 #include "aoc_2015_day3.hpp"
 #include "aoc_2015_day4.hpp"
+#include "aoc_2015_day5.hpp"
+#include "aoc_2015_day7.hpp"
 #include "aoc_2015_version.hpp"
 
 using namespace std;
@@ -53,10 +55,22 @@ public:
     void Day3();
 
     /*!
-        Function to print the solution to Day 3.
+        Function to print the solution to Day 4.
         \return void
     */
     void Day4();
+
+    /*!
+    Function to print the solution to Day 5.
+    \return void
+*/
+    void Day5();
+
+    /*!
+        Function to print the solution to Day 7.
+        \return void
+    */
+    void Day7();
 
     /*!
         Retrieves the version number of the 2015 implementation.
@@ -68,6 +82,8 @@ private:
     AoC2015Day2 day2;
     AoC2015Day3 day3;
     AoC2015Day4 day4;
+    AoC2015Day5 day5;
+    AoC2015Day7 day7;
 };
 
 

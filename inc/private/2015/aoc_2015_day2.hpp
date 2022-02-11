@@ -9,7 +9,7 @@
 
 using namespace std;
 
-enum match_position
+enum matchPosition
         {
             FULL_MATCH_POSITION = 0,
             LENGTH_POSITION = 1,
@@ -37,7 +37,7 @@ public:
         input string of the from LengthxWidthxHeight
         \return void
     */
-    void calcMaterialsNeeded(string &inputString);
+    void calcMaterialsNeeded(string &sInputString);
 
     /*!
         Function return the amount of present paper needed in square feet.
