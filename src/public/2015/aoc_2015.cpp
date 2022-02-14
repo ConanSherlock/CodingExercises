@@ -149,6 +149,41 @@ void AoC2015::Day4() {
     inputFile.close();
 }
 
+void AoC2015::Day5() {
+    string inputString;
+    string inputFileLocation = R"(./input_data/2015/day5_input.txt)";
+    ifstream inputFile;
+    uint32_t u32NiceCount = 0;
+
+    cout << "--- Day 5: Doesn't He Have Intern-Elves For This? ---\n";
+
+    inputFile.open(inputFileLocation);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day5.checkNaughtyOrNiceV1(inputString);
+            u32NiceCount = day5.getNiceCount();
+        }
+    }
+    cout << "Nice strings in part a: " << u32NiceCount << "\n";
+    day5.reset();
+
+    inputFile.clear();
+    inputFile.seekg(0, std::ifstream::beg);
+
+    u32NiceCount = 0;
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day5.checkNaughtyOrNiceV2(inputString);
+            u32NiceCount = day5.getNiceCount();
+        }
+    }
+    cout << "Nice strings in part b: " << u32NiceCount << "\n\n";
+
+    inputFile.close();
+}
+
+
 void AoC2015::Day7() {
     string inputString;
     string inputFileLocation = R"(./input_data/2015/day7_input.txt)";

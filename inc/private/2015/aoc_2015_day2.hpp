@@ -9,7 +9,7 @@
 
 using namespace std;
 
-enum match_position
+enum matchPosition
         {
             FULL_MATCH_POSITION = 0,
             LENGTH_POSITION = 1,
