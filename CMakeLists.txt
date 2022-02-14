@@ -17,13 +17,15 @@ file(GLOB AOC_2015_SRC_FILES
         src/public/2015/*.cpp
         src/private/2015/*.cpp
         src/private/utils/*.cpp
+        src/private/template/*.cpp
         )
 
 file(GLOB AOC_2015_HDR_PUBLIC
         inc/public/2015)
 file(GLOB AOC_2015_HDR_PRIVATE
         inc/private/2015
-        inc/private/utils)
+        inc/private/utils
+        inc/private/template)
 
 file(GLOB EXTERNAL_SRC_FILES
         external/md5/src/*.cpp
