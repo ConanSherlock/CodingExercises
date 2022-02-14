@@ -4,17 +4,11 @@
 
 #include "aoc_2015_day6.hpp"
 
-AoC2015Day6::AoC2015Day6() {
-    numLights = 0;
-    totalBrightness = 0;
-    ui16StartX = UINT16_MAX;
-    ui16StartY = UINT16_MAX;
-    ui16EndX = UINT16_MAX;
-    ui16EndY = UINT16_MAX;
-    rgxRegExLightsToggleCommandInput = (R"((toggle) (\d+),(\d+) through (\d+),(\d+))");
-    rgxRegExLightsTurnCommandInput = (R"(turn (\w+) (\d+),(\d+) through (\d+),(\d+))");
-    memset(lightsArray, false, NUMBER_OF_ROWS * NUMBER_OF_COLUMNS * sizeof(bool));
-}
+#define LIGHTS_ON "on"
+#define LIGHTS_OFF "off"
+#define INDEX_SIZE_OFFSET 1
+#define TOGGLE_INCREASE 2
+#define TURN_CHANGE 1
 
 void AoC2015Day6::reset() {
     numLights = 0;
@@ -28,7 +22,7 @@ void AoC2015Day6::reset() {
     memset(lightsArray, false, NUMBER_OF_ROWS * NUMBER_OF_COLUMNS * sizeof(bool));
 }
 
-void AoC2015Day6::updateLightsPartA(string &inputString) {
+void AoC2015Day6::updateLightsPartA(string const &inputString) {
     smatch matches;
     string on_off_string;
 
@@ -68,7 +62,7 @@ void AoC2015Day6::updateLightsPartA(string &inputString) {
     }
 }
 
-void AoC2015Day6::updateLightsPartB(string &inputString) {
+void AoC2015Day6::updateLightsPartB(string const &inputString) {
     smatch matches;
     string on_off_string;
 
