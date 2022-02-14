@@ -10,12 +10,6 @@
 
 using namespace std;
 
-#define VOWELS {"a", "e", "i", "o", "u"}
-#define FORBIDDEN_SUBSTRINGS {"ab", "cd", "pq", "xy"}
-#define REQUIRED_VOWELS 3
-#define SUBSTRING_SIZE 2
-#define DISPLACEMENT_TO_NEXT_CHAR 2
-
 typedef enum behaviour {
     UNKNOWN = -1,
     NICE = 0,
@@ -32,7 +26,14 @@ public:
     /*!
         Constructor and Destructor
     */
-    AoC2015Day5();
+    AoC2015Day5(){
+        bVowelsFound = false;
+        bRepeatLetterFound = false;
+        bTwoLettersFoundTwice = false;
+        u32NiceCount = 0;
+        beh_Behaviour = NAUGHTY;
+    }
+
     ~AoC2015Day5();
 
     /*!
@@ -45,13 +46,13 @@ public:
         Function to calculate if a string is naughty or nice based on the part a criteria
         \return behaviour Value signifying the behaviour of the string
     */
-    behaviour checkNaughtyOrNiceV1(string &sInputString);
+    behaviour checkNaughtyOrNiceV1(string const &sInputString);
 
     /*!
         Function to calculate if a string is naughty or nice based on the part b criteria
         \return behaviour Value signifying the behaviour of the string
     */
-    behaviour checkNaughtyOrNiceV2(string &sInputString);
+    behaviour checkNaughtyOrNiceV2(string const &sInputString);
 
     /*!
         Function to return the number of Nice strings found
@@ -62,7 +63,6 @@ public:
 private:
     bool bVowelsFound;
     bool bRepeatLetterFound;
-    bool bForbiddenStringFound;
     bool bTwoLettersFoundTwice;
     uint32_t u32NiceCount;
     behaviour beh_Behaviour;

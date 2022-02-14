@@ -35,7 +35,7 @@ void test_aoc_day5_basic_input() {
                                                                    {"dvszwmarrgswjxmb", NAUGHTY}};
     behaviour actualBehaviour;
 
-    for(pair<string, behaviour> pInputOutputPair: inputStringsToExpectedBehaviours) {
+    for(const pair<string, behaviour>& pInputOutputPair: inputStringsToExpectedBehaviours) {
         actualBehaviour = day5.checkNaughtyOrNiceV1(pInputOutputPair.first);
         day5.reset();
         TEST_ASSERT_EQUAL(pInputOutputPair.second, actualBehaviour);
@@ -59,7 +59,7 @@ void test_aoc_day5_p2_basic_input() {
                                                                    {"ieodomkazucvgmuy", NAUGHTY}};
     behaviour actualBehaviour;
 
-    for(pair<string, behaviour> pInputOutputPair: inputStringsToExpectedBehaviours) {
+    for(const pair<string, behaviour>& pInputOutputPair: inputStringsToExpectedBehaviours) {
         actualBehaviour = day5.checkNaughtyOrNiceV2(pInputOutputPair.first);
         day5.reset();
         TEST_ASSERT_EQUAL(pInputOutputPair.second, actualBehaviour);
