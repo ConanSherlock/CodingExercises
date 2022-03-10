@@ -55,6 +55,8 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
     string sExpressionPart3;
     wireInfo *pwI_TempWire1Info;
     wireInfo *pwI_TempWire2Info;
+    auto* TempWire1Info = (wireInfo *)malloc(sizeof(wireInfo));
+    auto* TempWire2Info = (wireInfo *)malloc(sizeof(wireInfo));
 
     // Breaks up the wire expression based on the deliminator " " and decide which operation to implement.
     // Also, recursively calls this function if one of the input wire assignments has not been evaluated.
@@ -64,8 +66,7 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
         wI_InputWireInfo.equation.erase(0, stPos + sDeliminator.length());
 
         if(sExpressionPart1 == OPERATOR_NOT){
-            wireInfo TempWire1Info;
-            checkForValue(&pwI_TempWire1Info, wI_InputWireInfo.equation, TempWire1Info);
+            checkForValue(&pwI_TempWire1Info, wI_InputWireInfo.equation, *TempWire1Info);
 
             if (!pwI_TempWire1Info->evaluated){
                 evaluateWire(*pwI_TempWire1Info);
@@ -106,19 +107,17 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
             }
 
             if(mmssWireMap.count(sExpressionPart1) == 0){
-                wireInfo TempWire1Info;
-                TempWire1Info.value = stoi(sExpressionPart1);
-                TempWire1Info.evaluated = true;
-                pwI_TempWire1Info = &TempWire1Info;
+                TempWire1Info->value = stoi(sExpressionPart1);
+                TempWire1Info->evaluated = true;
+                pwI_TempWire1Info = TempWire1Info;
             } else{
                 pwI_TempWire1Info = &mmssWireMap.find(sExpressionPart1)->second;
             }
 
             if(mmssWireMap.count(sExpressionPart3) == 0){
-                wireInfo TempWire2Info;
-                TempWire2Info.value = stoi(sExpressionPart3);
-                TempWire2Info.evaluated = true;
-                pwI_TempWire2Info = &TempWire2Info;
+                TempWire2Info->value = stoi(sExpressionPart3);
+                TempWire2Info->evaluated = true;
+                pwI_TempWire2Info = TempWire2Info;
             } else{
                 pwI_TempWire2Info = &mmssWireMap.find(sExpressionPart3)->second;
             }
@@ -150,10 +149,9 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
                 }
             }
 
-            wireInfo TempWire1Info;
-            TempWire1Info.value = stoi(wI_InputWireInfo.equation);
-            TempWire1Info.evaluated = true;
-            pwI_TempWire1Info = &TempWire1Info;
+            TempWire1Info->value = stoi(wI_InputWireInfo.equation);
+            TempWire1Info->evaluated = true;
+            pwI_TempWire1Info = TempWire1Info;
         } else{
             pwI_TempWire1Info = &mmssWireMap.find(wI_InputWireInfo.equation)->second;
         }
@@ -165,6 +163,8 @@ void AoC2015Day7::evaluateWire(wireInfo &wI_InputWireInfo) {
         wI_InputWireInfo.value = pwI_TempWire1Info->value;
         wI_InputWireInfo.evaluated = true;
     }
+    free(TempWire1Info);
+    free(TempWire2Info);
 }
 
 void AoC2015Day7::notOperation(wireInfo *wI_InputWire, wireInfo &wI_OutputWire){
