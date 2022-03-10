@@ -27,8 +27,8 @@ public:
     AoC2015Day4();
     ~AoC2015Day4();
 
-    int md5LeadingZeroes(string &sInputString, int iLeadingZeroes);
-    int getSecretCode() const;  //NOLINT
+    uint32_t md5LeadingZeroes(string &sInputString, int iLeadingZeroes);
+    uint32_t getSecretCode() const;  //NOLINT
     int getLeadingZeroes() const;  //NOLINT
 
     void reset();
@@ -36,7 +36,7 @@ public:
 private:
     bool bDebugPrint;
     int iLeadingZeroCount;
-    uint32_t iIntCode;
+    uint32_t ui32IntCode;
 };
 
 #endif //CPP_AOC_2015_DAY4_H

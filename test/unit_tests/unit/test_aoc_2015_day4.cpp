@@ -25,8 +25,8 @@ void test_aoc_day4_basic_input() {
     string inputString2 = "pqrstuv";
 
     // Good input Check
-    int expectedIntCode = 609043;
-    int actualIntCode;
+    uint32_t expectedIntCode = 609043;
+    uint32_t actualIntCode;
 
     actualIntCode = day4.md5LeadingZeroes(inputString1, 5);
     TEST_ASSERT_EQUAL(expectedIntCode, actualIntCode);
@@ -50,9 +50,9 @@ void test_aoc_day4_input_file() {
     string inputFileName = {"./input_data/2015/day4_input.txt"};
     inputFile.open(inputFileName);
 
-    int expectedIntCode1 = 346386;
-    int expectedIntCode2 = 9958218;
-    int actualIntCode;
+    uint32_t expectedIntCode1 = 346386;
+    uint32_t expectedIntCode2 = 9958218;
+    uint32_t actualIntCode;
 
     if (inputFile.is_open()) {
         while (getline(inputFile, inputString)) {
