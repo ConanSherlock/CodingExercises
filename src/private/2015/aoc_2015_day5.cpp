@@ -4,64 +4,56 @@
 
 #include "aoc_2015_day5.hpp"
 
-AoC2015Day5::AoC2015Day5() {
-    bVowelsFound = false;
-    bRepeatLetterFound = false;
-    bForbiddenStringFound = false;
-    bTwoLettersFoundTwice = false;
-    u32NiceCount = 0;
-    beh_Behaviour = UNKNOWN;
-}
+#define VOWELS {"a", "e", "i", "o", "u"}
+#define FORBIDDEN_SUBSTRINGS {"ab", "cd", "pq", "xy"}
+#define REQUIRED_VOWELS 3
+#define SUBSTRING_SIZE 2
+#define DISPLACEMENT_TO_NEXT_CHAR 2
+
 
 void AoC2015Day5::reset() {
     bVowelsFound = false;
     bRepeatLetterFound = false;
-    bForbiddenStringFound = false;
     bTwoLettersFoundTwice = false;
     u32NiceCount = 0;
     beh_Behaviour = UNKNOWN;
 }
 
-behaviour AoC2015Day5::checkNaughtyOrNiceV1(string &sInputString) {
-    size_t badStringPosition;
+behaviour AoC2015Day5::checkNaughtyOrNiceV1(string const &sInputString) {
+    string sub_string;
     int vowelsFound = 0;
     bVowelsFound = false;
     bRepeatLetterFound = false;
-    bForbiddenStringFound = false;
 
-    for(uint32_t i = 0; i<sInputString.length(); i++){
+    for(auto it = sInputString.begin(); it != sInputString.end(); it++){
 
         for(string sBadSubstring : FORBIDDEN_SUBSTRINGS) {
-            badStringPosition = sInputString.find(sBadSubstring, i);
-            if(badStringPosition!=SIZE_MAX){
-                bForbiddenStringFound = true;
-                break;
+            sub_string = {*it, *(it+1)};
+            if(it != sInputString.end()) {
+                if (sub_string == sBadSubstring) {
+                    beh_Behaviour = NAUGHTY;
+                    return beh_Behaviour;
+                }
             }
-        }
-
-        if(bForbiddenStringFound){
-            beh_Behaviour = NAUGHTY;
-            break;
         }
 
         for(string sVowel : VOWELS) {
-            if(sVowel[0] == sInputString[i]){
+            if(sVowel[0] == *it){
                 vowelsFound++;
+            }
+            if(vowelsFound>=REQUIRED_VOWELS){
+                bVowelsFound = true;
             }
         }
 
-        if(vowelsFound>=REQUIRED_VOWELS){
-            bVowelsFound = true;
-        }
-
-        if(i+1<sInputString.length() && !bRepeatLetterFound){
-            if(sInputString[i] == sInputString[i+1]){
+        if(it != sInputString.end() && !bRepeatLetterFound){
+            if(*it == *(it+1)){
                 bRepeatLetterFound=true;
             }
         }
     }
 
-    if(!bForbiddenStringFound && bVowelsFound && bRepeatLetterFound){
+    if(bVowelsFound && bRepeatLetterFound){
         beh_Behaviour = NICE;
         u32NiceCount++;
     } else{
@@ -71,7 +63,7 @@ behaviour AoC2015Day5::checkNaughtyOrNiceV1(string &sInputString) {
     return beh_Behaviour;
 }
 
-behaviour AoC2015Day5::checkNaughtyOrNiceV2(string &sInputString) {
+behaviour AoC2015Day5::checkNaughtyOrNiceV2(string const &sInputString) {
     size_t stringPosition;
     string tempSubstring;
     bVowelsFound = false;

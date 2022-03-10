@@ -6,6 +6,9 @@ AoC2015::AoC2015(){
     day1.reset();
     day2.reset();
     day3.reset();
+    day4.reset();
+    day5.reset();
+    day6.reset();
     day7.reset();
 }
 
@@ -16,6 +19,8 @@ void AoC2015::reset(){
     day2.reset();
     day3.reset();
     day4.reset();
+    day5.reset();
+    day6.reset();
     day7.reset();
 }
 
@@ -127,7 +132,7 @@ void AoC2015::Day4() {
     string inputString;
     string inputFileLocation = R"(./input_data/2015/day4_input.txt)";
     ifstream inputFile;
-    int intCode;
+    uint32_t intCode;
 
     cout << "--- Day 4: The Ideal Stocking Stuffer ---\n";
 
@@ -183,6 +188,40 @@ void AoC2015::Day5() {
     inputFile.close();
 }
 
+void AoC2015::Day6() {
+    string inputString;
+    string inputFileLocation = R"(./input_data/2015/day6_input.txt)";
+    ifstream inputFile;
+    int numberOfLights = 0;
+    int totalBrightness = 0;
+
+    cout << "--- Day 6: Probably a Fire Hazard ---\n";
+
+    inputFile.open(inputFileLocation);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day6.updateLightsPartA(inputString);
+            numberOfLights = day6.getNumberOfLightsOn();
+        }
+    }
+    cout << "Numbers of lights on in part a: " << numberOfLights << "\n";
+    day6.reset();
+
+    inputFile.clear();
+    inputFile.seekg(0, std::ifstream::beg);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day6.updateLightsPartB(inputString);
+            totalBrightness = day6.getTotalBrightness();
+        }
+    }
+    cout << "Total brightness of the light array in part b: " << totalBrightness << "\n\n";
+
+    inputFile.close();
+}
+
 
 void AoC2015::Day7() {
     string inputString;
@@ -217,7 +256,7 @@ void AoC2015::Day7() {
         }
     }
 
-    cout << "Value of wire A in part 1: " << wireAValue << "\n";
+    cout << "Value of wire A in part a: " << wireAValue << "\n";
 
     newWireBInfo.equation = to_string(wireAValue);
 
@@ -244,7 +283,7 @@ void AoC2015::Day7() {
         }
     }
 
-    cout << "Value of wire A in part 2: " << wireAValue << "\n\n";
+    cout << "Value of wire A in part b: " << wireAValue << "\n\n";
 
     inputFile.close();
 }

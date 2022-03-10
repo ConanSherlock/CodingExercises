@@ -10,12 +10,11 @@
 using namespace std;
 
 enum matchPosition
-        {
-            FULL_MATCH_POSITION = 0,
-            LENGTH_POSITION = 1,
-            WIDTH_POSITION = 2,
-            HEIGHT_POSITION = 3
-        };
+{
+    LENGTH_POSITION = 1,
+    WIDTH_POSITION = 2,
+    HEIGHT_POSITION = 3
+};
 
 /*!
     Class to implement the solution to AoC 2015 Day 2
