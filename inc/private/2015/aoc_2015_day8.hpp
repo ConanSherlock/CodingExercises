@@ -29,6 +29,9 @@ public:
     */
     void evaluateString(const string &sInputString);
 
+    uint32_t getCharsStringCode();
+    uint32_t getCharsInMem();
+
     /*!
         Function to reset the values of the class
         \return void
@@ -36,7 +39,8 @@ public:
     void reset();
 
 private:
-
+    uint32_t u32CharsInMem;
+    uint32_t u32CharsInStringCode;
 };
 
 #endif //CPP_AOC_2015_DAY8_H
