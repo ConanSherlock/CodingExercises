@@ -9,6 +9,8 @@
 
 using namespace std;
 
+
+
 /** ***************************************** Global Variables ********************************************************/
 
 /** ***************************************** Private Function Declarations *******************************************/
@@ -31,18 +33,30 @@ void test_aoc_day8_basic_input() {
     AoC2015Day8 day8;
 
     string goodInputStrings[4] = {R"("")", R"("abc")", R"("aaa\"aaa")", R"("\x27")"};
+    uint32_t expectedCharsInString[4] = {2,5,10,6};
+    uint32_t expectedCharsInMem[4] = {0,3,7,1};
+    uint32_t actualCharsInMem;
+    uint32_t actualCharsInString;
+    uint32_t sumCharsInMem = 0;
+    uint32_t sumCharsInString = 0;
+    uint32_t expectedSumCharsInString = 23;
+    uint32_t expectedSumCharsInMem = 11;
 
     string line;
 
     // Good input Check
-    for (auto &i: goodInputStrings) {
-        day8.evaluateString(i);
-
-        // TODO check outputs of total characters and string characters for each string
+    for (int i=0; i<sizeof(goodInputStrings)/sizeof(string); ++i) {
+        day8.evaluateString(goodInputStrings[i]);
+        actualCharsInString = day8.getCharsStringCode();
+        actualCharsInMem = day8.getCharsInMem();
+        TEST_ASSERT_EQUAL(expectedCharsInMem[i], actualCharsInMem);
+        TEST_ASSERT_EQUAL(expectedCharsInString[i], actualCharsInString);
+        sumCharsInMem += actualCharsInMem;
+        sumCharsInString += actualCharsInString;
     }
 
-    // TODO check overall total characters and string characters for all strings
-
+    TEST_ASSERT_EQUAL(expectedSumCharsInMem, sumCharsInMem);
+    TEST_ASSERT_EQUAL(expectedSumCharsInString, sumCharsInString);
 }
 
 void test_aoc_day8_input_file() {
@@ -53,14 +67,28 @@ void test_aoc_day8_input_file() {
     ifstream inputFile;
     string inputFileName = {"./input_data/2015/day8_input.txt"};
     inputFile.open(inputFileName);
+    uint32_t charsInMem;
+    uint32_t charsInString;
+    uint32_t sumCharsInMem = 0;
+    uint32_t sumCharsInStringCode = 0;
+    uint32_t actualDiffCharsTotal = 0;
+    uint32_t expectedDiffCharsTotal = 1350;
+
+    AoC2015Day8 day8;
 
     if (inputFile.is_open()) {
         while (getline(inputFile, inputString)) {
-            printf("%s\n", inputString.c_str());
+            day8.evaluateString(inputString);
+            charsInMem = day8.getCharsStringCode();
+            charsInString = day8.getCharsInMem();
+            sumCharsInMem += charsInMem;
+            sumCharsInStringCode += charsInString;
         }
     }
 
-    // TODO check overall total characters and string characters for all strings in the file
+    actualDiffCharsTotal = sumCharsInMem - sumCharsInStringCode;
+
+    TEST_ASSERT_EQUAL(expectedDiffCharsTotal, actualDiffCharsTotal);
 
     inputFile.close();
 
