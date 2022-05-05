@@ -32,6 +32,7 @@ extern void test_aoc2015_day4(bool printTest);
 extern void test_aoc2015_day5(bool printTest);
 extern void test_aoc2015_day6(bool printTest);
 extern void test_aoc2015_day7(bool printTest);
+extern void test_aoc2015_day8(bool printTest);
 
 /** ***************************************** Public Function Declarations ********************************************/
 
