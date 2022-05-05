@@ -29,6 +29,8 @@ public:
     */
     void evaluateString(const string &sInputString);
 
+    void evaluateEncodedString(const string &sInputString);
+
     uint32_t getCharsStringCode();
     uint32_t getCharsInMem();
 

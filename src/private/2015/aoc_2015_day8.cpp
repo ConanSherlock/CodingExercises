@@ -17,32 +17,74 @@ void AoC2015Day8::reset() {
 void AoC2015Day8::evaluateString(const string &sInputString) {
     uint16_t skipChars = 0;
     u32CharsInMem = 0;
-    u32CharsInStringCode = 2;
+    u32CharsInStringCode = sInputString.length();
 
-    for (int i=1; i<sInputString.length()-1; ++i) {
+    for (unsigned int i=1; i<sInputString.length()-1; ++i) {
         if(skipChars > 0){
             --skipChars;
             continue;
         }
 
-        ++u32CharsInStringCode;
         ++u32CharsInMem;
 
         if(sInputString[i] == '\\'){
             if(sInputString[i+1] == 'x'){
                 skipChars = 3;
-                u32CharsInStringCode += 3;
             } else {
-                ++u32CharsInStringCode;
                 skipChars = 1;
             }
         }
-        // TODO read string literal character by character
-        // TODO If \x plus 2 char hex code is 1 actual character and 4 code characters
-        // TODO else if \ + escaped character should be 1 actual character but 2 code characters
-        // TODO else just add one character
-
     }
+}
+
+void AoC2015Day8::evaluateEncodedString(const string &sInputString) {
+    string encodedInput = "\"";
+    int skipChars = 0;
+
+    u32CharsInMem = 0;
+    u32CharsInStringCode = sInputString.length();
+
+    for (unsigned int i=0; i<sInputString.length(); ++i) {
+        if(skipChars > 0){
+            encodedInput += sInputString[i];
+            --skipChars;
+            continue;
+        }
+
+        if(sInputString[i] == '\"'){
+            encodedInput.append("\\\"");
+            continue;
+        } else if(sInputString[i] == '\\'){
+            encodedInput.append("\\\\");
+
+            if(i+1>=sInputString.length()) {
+                return;
+            }
+
+            if(sInputString[i+1] == 'x'){
+                if(i+3 >= sInputString.length()){
+                    return;
+                }
+
+                if(isdigit(sInputString[i+3])&&isdigit(sInputString[i+2])){
+                    skipChars = 3;
+                }else if (isdigit(sInputString[i+2])){
+                    skipChars = 2;
+                } else{
+                    skipChars = 0;
+                }
+                ++u32CharsInMem;
+                continue;
+            }
+        } else{
+            encodedInput += sInputString[i];
+        }
+        ++u32CharsInMem;
+    }
+
+    encodedInput += "\"";
+
+    u32CharsInStringCode = encodedInput.length();
 }
 
 uint32_t AoC2015Day8::getCharsStringCode() {
