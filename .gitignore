@@ -151,3 +151,5 @@ fabric.properties
 /cmake_install.cmake
 /jenkins-build-release/
 /jenkins-build/
+.idea
+/.idea

@@ -288,6 +288,30 @@ void AoC2015::Day7() {
     inputFile.close();
 }
 
+void AoC2015::Day8() {
+    string inputString;
+    string inputFileLocation = R"(./input_data/2015/day8_input.txt)";
+    ifstream inputFile;
+
+    cout << "--- Day 8: Matchsticks ---\n";
+
+    inputFile.open(inputFileLocation);
+
+    if (inputFile.is_open()) {
+        while (getline(inputFile, inputString)) {
+            day8.evaluateString(inputString);
+        }
+    }
+
+    // TODO output answer of part A
+
+    // TODO implement part B
+
+    // TODO output answer of part B
+
+    inputFile.close();
+}
+
 string AoC2015::AoC2015GetVersion() {
     return AOC_2015_VERSION + to_string(AOC_2015_BUILD_NUM);
 }
