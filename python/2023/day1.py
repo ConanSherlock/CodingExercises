@@ -23,7 +23,6 @@ class Day1:
         if type(input_string) != str:
             raise AoC2015Day1Exception("%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string)))
 
-
         self._current_calibration = -1
 
         found_digits = []
