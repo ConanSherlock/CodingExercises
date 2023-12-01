@@ -29,6 +29,7 @@ class Day2:
         self._height = -1
         self._paper_required = -1
         self._slack = -1
+        self._ribbon_required = -1
         self._total_paper_required = 0
         self._total_ribbon_required = 0
 
@@ -40,6 +41,7 @@ class Day2:
         self._height = -1
         self._paper_required = -1
         self._slack = -1
+        self._ribbon_required = -1
         self._total_paper_required = 0
         self._total_ribbon_required = 0
 
@@ -64,14 +66,16 @@ class Day2:
         self._paper_required = 2 * self._length * self._width + \
             2 * self._width * self._height + \
             2 * self._height * self._length + self._slack
+        self._ribbon_required = self._length + self._width + self._height
 
         self._total_paper_required += self._paper_required
+        self._total_ribbon_required += self._ribbon_required
 
     def get_total_paper_required(self):
         return self._total_paper_required
 
     def get_total_ribbon_required(self):
-        return self._total_paper_required
+        return self._total_ribbon_required
 
 
 if __name__ == "__main__":

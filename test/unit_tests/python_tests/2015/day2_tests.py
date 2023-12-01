@@ -11,11 +11,11 @@ try:
 
 except FileNotFoundError as e:
     print(e)
-    print("Failed importing AoC 2015 day1")
+    print("Failed importing AoC 2015 day2")
     exit(-1)
 
 
-class AoC2015Day1Test(unittest.TestCase):
+class AoC2015Day2Test(unittest.TestCase):
     def setUp(self):
         self.__class__.day2 = None
 
