@@ -66,7 +66,13 @@ class Day2:
         self._paper_required = 2 * self._length * self._width + \
             2 * self._width * self._height + \
             2 * self._height * self._length + self._slack
-        self._ribbon_required = self._length + self._width + self._height
+
+        bow = self._length * self._width * self._height
+        sides = [self._length, self._width, self._height]
+        smallest_side = min(sides)
+        sides.remove(smallest_side)
+        second_smallest_side = min(sides)
+        self._ribbon_required = smallest_side*2 + second_smallest_side*2 + bow
 
         self._total_paper_required += self._paper_required
         self._total_ribbon_required += self._ribbon_required
