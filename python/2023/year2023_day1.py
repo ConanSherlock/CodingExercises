@@ -21,7 +21,9 @@ class Day1:
     def find_calibration(self, input_string):
         # Checking for invalid input types
         if type(input_string) != str:
-            raise AoC2015Day1Exception("%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string)))
+            raise AoC2015Day1Exception(
+                "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))
+            )
 
         self._current_calibration = -1
 
@@ -64,5 +66,7 @@ if __name__ == "__main__":
         day1.find_calibration(calibration_input)
 
     print("--- Day 1: Trebuchet?! ---")
-    print("Part A Sum of all of the calibration values: %d" % day1.get_total_calibration())
-    print("Part B Sum of all of the calibration values: %d" % day1.get_basement_interation())
+    print(
+        "Part A Sum of all of the calibration values: %d" % day1.get_total_calibration()
+    )
+    # print("Part B Sum of all of the calibration values: %d" % day1.get_basement_interation())
