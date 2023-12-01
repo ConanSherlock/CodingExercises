@@ -10,7 +10,6 @@ try:
     day1 = importlib.util.module_from_spec(spec)  # type: ignore
     spec.loader.exec_module(day1)
 
-
 except FileNotFoundError as e:
     print(e)
     print("Failed importing AoC 2023 day1")
