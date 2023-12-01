@@ -19,6 +19,9 @@ class Day1:
         self._current_calibration = -1
 
 
+
+
+
     def find_calibration(self, input_string):
         # Checking for invalid input types
         if type(input_string) != str:
