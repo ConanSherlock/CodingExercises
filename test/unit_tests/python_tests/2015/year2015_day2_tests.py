@@ -4,11 +4,11 @@ import unittest
 # This script should be run from PathToRepo/python/tools
 # Try to general utils code
 try:
-    spec = importlib.util.spec_from_file_location(  # type: ignore [attr-defined]
+    spec = importlib.util.spec_from_file_location(  # type: ignore
         "mod", "../../../../python/2015/day2.py"
     )
 
-    day2 = importlib.util.module_from_spec(spec)  # type: ignore [attr-defined]
+    day2 = importlib.util.module_from_spec(spec)  # type: ignore
     spec.loader.exec_module(day2)
 
 except FileNotFoundError as e:
