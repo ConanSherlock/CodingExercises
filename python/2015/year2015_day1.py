@@ -32,13 +32,17 @@ class Day1:
     def calc_floor(self, input_string):
         # Checking for invalid input types
         if type(input_string) != str:
-            raise AoC2015Day1Exception("%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string)))
+            raise AoC2015Day1Exception(
+                "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))
+            )
 
         loop_count = 0
 
         for character in input_string:
             if character != Directions.UP.value and character != Directions.DOWN.value:
-                raise AoC2015Day1Exception("%s: %s" % (INVALID_CHAR_EXCEPTION, character))
+                raise AoC2015Day1Exception(
+                    "%s: %s" % (INVALID_CHAR_EXCEPTION, character)
+                )
 
             if character == Directions.UP.value:
                 self._floor += 1
@@ -46,7 +50,10 @@ class Day1:
                 self._floor -= 1
 
             # Setting basement interation only if it not already found
-            if self._floor < 0 and self._basement_interation_index == BASEMENT_NOT_FOUND:
+            if (
+                self._floor < 0
+                and self._basement_interation_index == BASEMENT_NOT_FOUND
+            ):
                 self._basement_interation_index = loop_count
 
             loop_count += 1
@@ -72,4 +79,6 @@ if __name__ == "__main__":
 
     print("--- Day 1: Not Quite Lisp ---")
     print("Part A Final floor: %d" % day1.get_floor())
-    print("Part B Iterations until basement entered: %d" % day1.get_basement_interation())
+    print(
+        "Part B Iterations until basement entered: %d" % day1.get_basement_interation()
+    )

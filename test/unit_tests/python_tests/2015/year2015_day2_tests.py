@@ -4,9 +4,11 @@ import unittest
 # This script should be run from PathToRepo/python/tools
 # Try to general utils code
 try:
-    spec = importlib.util.spec_from_file_location("mod", "../../../../python/2015/day2.py")
+    spec = importlib.util.spec_from_file_location(  # type: ignore [attr-defined]
+        "mod", "../../../../python/2015/day2.py"
+    )
 
-    day2 = importlib.util.module_from_spec(spec)
+    day2 = importlib.util.module_from_spec(spec)  # type: ignore [attr-defined]
     spec.loader.exec_module(day2)
 
 except FileNotFoundError as e:
@@ -28,10 +30,15 @@ class AoC2015Day2Test(unittest.TestCase):
 
         expected_initial_sqr_ft_of_paper = 0
 
-        for input_string, expected_floor_output in zip(input_strings, expected_sqr_ft_of_paper):
+        for input_string, expected_floor_output in zip(
+            input_strings, expected_sqr_ft_of_paper
+        ):
             self.__class__.day2.reset()
 
-            self.assertEqual(expected_initial_sqr_ft_of_paper, self.__class__.day2.get_total_paper_required())
+            self.assertEqual(
+                expected_initial_sqr_ft_of_paper,
+                self.__class__.day2.get_total_paper_required(),
+            )
 
             self.__class__.day2.calc_dimensions(input_string)
 
@@ -48,7 +55,9 @@ class AoC2015Day2Test(unittest.TestCase):
 
         expected_ribbon_outputs = [34, 14]
 
-        for input_string, expected_ribbon_output in zip(input_strings, expected_ribbon_outputs):
+        for input_string, expected_ribbon_output in zip(
+            input_strings, expected_ribbon_outputs
+        ):
             self.__class__.day2.reset()
 
             actual_ribbon_value = self.__class__.day2.get_total_ribbon_required()
