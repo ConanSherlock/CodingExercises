@@ -80,20 +80,19 @@ class AoC2023Day2Test(unittest.TestCase):
         expected_sum_cube_powers = 2286
 
         expected_init_cube_powers = 0
-        expected_sum_cube_powers = 0
+        expected_init_sum_cube_powers = 0
 
         self.assertEqual(
             expected_init_cube_powers, self.__class__.day2.get_possible_configuration()
         )
         self.assertEqual(
-            expected_sum_cube_powers, self.__class__.day2.get_sum_game_ids()
+            expected_init_sum_cube_powers, self.__class__.day2.get_sum_game_ids()
         )
 
         for input_string, expected_cube_power in zip(
             input_strings, expected_cube_powers
         ):
             self.__class__.day2.possible_configuration(input_string)
-            self.__class__.day2.get_possible_configuration()
             self.assertEqual(
                 expected_cube_power, self.__class__.day2.get_current_cube_power()
             )
@@ -107,7 +106,7 @@ class AoC2023Day2Test(unittest.TestCase):
             expected_init_cube_powers, self.__class__.day2.get_current_cube_power()
         )
         self.assertEqual(
-            expected_sum_cube_powers, self.__class__.day2.get_sum_cube_power()
+            expected_init_sum_cube_powers, self.__class__.day2.get_sum_cube_power()
         )
 
     def test_bad_inputs(self):

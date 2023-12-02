@@ -65,7 +65,6 @@ class Day2:
                 if green_list[-1] > self._green_limit:
                     over_max_green_list.append(int(green))
                     self._possible_configuration = False
-                    break
             except ValueError:
                 pass
             try:
@@ -73,7 +72,6 @@ class Day2:
                 if red_list[-1] > self._red_limit:
                     over_max_red_list.append(int(red))
                     self._possible_configuration = False
-                    break
             except ValueError:
                 pass
             try:
@@ -81,7 +79,6 @@ class Day2:
                 if blue_list[-1] > self._blue_limit:
                     over_max_blue_list.append(int(blue))
                     self._possible_configuration = False
-                    break
             except ValueError:
                 pass
 
