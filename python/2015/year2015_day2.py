@@ -22,56 +22,77 @@ class AoC2015Day2Exception(Exception):
 
 class Day2:
     def __init__(self):
-        self._regex = re.compile(r'(\d+)x(\d+)x(\d+)')
+        self._regex = re.compile(r"(\d+)x(\d+)x(\d+)")
         self._match = None
         self._length = -1
         self._width = -1
         self._height = -1
         self._paper_required = -1
         self._slack = -1
+        self._ribbon_required = -1
         self._total_paper_required = 0
         self._total_ribbon_required = 0
 
     def reset(self):
-        self._regex = re.compile(r'(\d+)x(\d+)x(\d+)')
+        self._regex = re.compile(r"(\d+)x(\d+)x(\d+)")
         self._match = None
         self._length = -1
         self._width = -1
         self._height = -1
         self._paper_required = -1
         self._slack = -1
+        self._ribbon_required = -1
         self._total_paper_required = 0
         self._total_ribbon_required = 0
 
     def calc_dimensions(self, input_string):
         # Checking for invalid input types
         if type(input_string) != str:
-            raise AoC2015Day2Exception("%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string)))
+            raise AoC2015Day2Exception(
+                "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))
+            )
 
         self._match = self._regex.match(input_string)
 
         if self._match is None:
-            raise AoC2015Day2Exception("%s: %s" % (INVALID_STRING_COMPOSITION_EXCEPTION, input_string))
+            raise AoC2015Day2Exception(
+                "%s: %s" % (INVALID_STRING_COMPOSITION_EXCEPTION, input_string)
+            )
 
         self._length = int(self._match.group(Dimensions.LENGTH.value))
         self._width = int(self._match.group(Dimensions.WIDTH.value))
         self._height = int(self._match.group(Dimensions.HEIGHT.value))
 
-        list_of_side_areas = [self._length*self._width, self._width*self._height, self._height*self._length]
+        list_of_side_areas = [
+            self._length * self._width,
+            self._width * self._height,
+            self._height * self._length,
+        ]
 
         self._slack = min(list_of_side_areas)
 
-        self._paper_required = 2 * self._length * self._width + \
-            2 * self._width * self._height + \
-            2 * self._height * self._length + self._slack
+        self._paper_required = (
+            2 * self._length * self._width
+            + 2 * self._width * self._height
+            + 2 * self._height * self._length
+            + self._slack
+        )
+
+        bow = self._length * self._width * self._height
+        sides = [self._length, self._width, self._height]
+        smallest_side = min(sides)
+        sides.remove(smallest_side)
+        second_smallest_side = min(sides)
+        self._ribbon_required = smallest_side * 2 + second_smallest_side * 2 + bow
 
         self._total_paper_required += self._paper_required
+        self._total_ribbon_required += self._ribbon_required
 
     def get_total_paper_required(self):
         return self._total_paper_required
 
     def get_total_ribbon_required(self):
-        return self._total_paper_required
+        return self._total_ribbon_required
 
 
 if __name__ == "__main__":

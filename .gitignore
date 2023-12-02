@@ -153,3 +153,4 @@ fabric.properties
 /jenkins-build/
 .idea
 /.idea
+*.pyc

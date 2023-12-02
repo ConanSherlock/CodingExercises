@@ -4,18 +4,20 @@ import unittest
 # This script should be run from PathToRepo/python/tools
 # Try to general utils code
 try:
-    spec = importlib.util.spec_from_file_location("mod", "../../../python/2015/day2.py")
+    spec = importlib.util.spec_from_file_location(  # type: ignore
+        "mod", "../../../../python/2015/day2.py"
+    )
 
-    day2 = importlib.util.module_from_spec(spec)
+    day2 = importlib.util.module_from_spec(spec)  # type: ignore
     spec.loader.exec_module(day2)
 
 except FileNotFoundError as e:
     print(e)
-    print("Failed importing AoC 2015 day1")
+    print("Failed importing AoC 2015 day2")
     exit(-1)
 
 
-class AoC2015Day1Test(unittest.TestCase):
+class AoC2015Day2Test(unittest.TestCase):
     def setUp(self):
         self.__class__.day2 = None
 
@@ -28,10 +30,15 @@ class AoC2015Day1Test(unittest.TestCase):
 
         expected_initial_sqr_ft_of_paper = 0
 
-        for input_string, expected_floor_output in zip(input_strings, expected_sqr_ft_of_paper):
+        for input_string, expected_floor_output in zip(
+            input_strings, expected_sqr_ft_of_paper
+        ):
             self.__class__.day2.reset()
 
-            self.assertEqual(expected_initial_sqr_ft_of_paper, self.__class__.day2.get_total_paper_required())
+            self.assertEqual(
+                expected_initial_sqr_ft_of_paper,
+                self.__class__.day2.get_total_paper_required(),
+            )
 
             self.__class__.day2.calc_dimensions(input_string)
 
@@ -42,22 +49,25 @@ class AoC2015Day1Test(unittest.TestCase):
     def test_given_inputs_part2(self):
         self.__class__.day2 = day2.Day2()
 
-        input_strings = [")", "()())", "("]
+        input_strings = ["2x3x4", "1x1x10"]
 
-        expected_basement_iteration_not_found = 0
+        expected_ribbon_init = 0
 
-        expected_basement_outputs = [1, 5, expected_basement_iteration_not_found]
+        expected_ribbon_outputs = [34, 14]
 
-        for input_string, expected_basement_output in zip(input_strings, expected_basement_outputs):
+        for input_string, expected_ribbon_output in zip(
+            input_strings, expected_ribbon_outputs
+        ):
             self.__class__.day2.reset()
 
-            self.assertEqual(expected_basement_iteration_not_found, self.__class__.day2.get_basement_interation())
+            actual_ribbon_value = self.__class__.day2.get_total_ribbon_required()
+            self.assertEqual(expected_ribbon_init, actual_ribbon_value)
 
             self.__class__.day2.calc_dimensions(input_string)
 
-            actual_basement_value = self.__class__.day2.get_basement_interation()
+            actual_ribbon_value = self.__class__.day2.get_total_ribbon_required()
 
-            self.assertEqual(expected_basement_output, actual_basement_value)
+            self.assertEqual(expected_ribbon_output, actual_ribbon_value)
 
     def test_bad_inputs(self):
         self.__class__.day2 = day2.Day2()
