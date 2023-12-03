@@ -133,9 +133,9 @@ class Day2:
 
 if __name__ == "__main__":
 
-    day1_file_path = "../../test/input_data/2023/day2_input.txt"
+    day2_file_path = "../../test/input_data/2023/day2_input.txt"
 
-    with open(day1_file_path, "r") as input_file:
+    with open(day2_file_path, "r") as input_file:
         input_data = input_file.readlines()
 
     day2 = Day2()
