@@ -16,7 +16,7 @@ except FileNotFoundError as e:
     exit(-1)
 
 
-class AoC2015Day1Test(unittest.TestCase):
+class AoC2023Day1Test(unittest.TestCase):
     def setUp(self):
         self.__class__.day1 = None
 
@@ -117,5 +117,5 @@ class AoC2015Day1Test(unittest.TestCase):
         try:
             self.__class__.day1.find_calibration(1)
             self.assertTrue(False, "Exception not thrown")
-        except day1.AoC2015Day1Exception as excep:
+        except day1.AoC2023Day1Exception as excep:
             self.assertTrue(expected_bad_data_exception in str(excep))

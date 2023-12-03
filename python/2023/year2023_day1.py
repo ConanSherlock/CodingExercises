@@ -3,7 +3,7 @@ from typing import List, Dict
 INVALID_TYPE_EXCEPTION = "Invalid data type given"
 
 
-class AoC2015Day1Exception(Exception):
+class AoC2023Day1Exception(Exception):
     def __init__(self, value):
         self.value = value
 
@@ -37,7 +37,7 @@ class Day1:
     def find_calibration(self, input_string: str, advanced_calibration: bool = False):
         # Checking for invalid input types
         if type(input_string) != str:
-            raise AoC2015Day1Exception(
+            raise AoC2023Day1Exception(
                 "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))
             )
 
