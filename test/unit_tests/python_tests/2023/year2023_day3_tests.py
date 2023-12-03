@@ -20,7 +20,7 @@ class AoC2023Day3Test(unittest.TestCase):
     def setUp(self):
         self.__class__.day3 = None
 
-    def test_given_inputs_calibration(self):
+    def test_given_inputs_find_part_numbers(self):
         self.__class__.day3 = day3.Day3()
 
         input_strings = [
@@ -29,7 +29,6 @@ class AoC2023Day3Test(unittest.TestCase):
             "..35..633.\n",
             "......#...\n",
             "617*......\n",
-            "467..114..\n",
             ".....+.58.\n",
             "..592.....\n",
             "......755.\n",
@@ -38,17 +37,14 @@ class AoC2023Day3Test(unittest.TestCase):
         ]
 
         expected_found_part_ids_list = [
-            [467],
-            [],
-            [35, 633],
-            [],
-            [617],
-            [467, 114],
-            [],
-            [592],
-            [755],
-            [],
-            [664, 598],
+            467,
+            35,
+            633,
+            617,
+            592,
+            755,
+            664,
+            598,
         ]
 
         expected_sum_parts_ids = 4361

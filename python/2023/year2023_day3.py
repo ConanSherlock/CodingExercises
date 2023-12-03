@@ -14,13 +14,12 @@ class AoC2023Day3Exception(Exception):
 
 class Day3:
     def __init__(self):
-        self._total_found_part_numbers = []
         self._number_start_indices = []
         self._number_end_indices = []
         self._symbol_start_indices = []
         self._symbol_end_indices = []
         self._found_part_numbers = []
-
+        self._found_numbers_list = []
         self._sum_part_numbers = 0
 
         self._number_regex_pattern = re.compile(r"(\d+)")
@@ -31,12 +30,13 @@ class Day3:
         self._column = 1
 
     def reset(self):
-        self._total_found_part_numbers = []
         self._number_start_indices = []
         self._number_end_indices = []
         self._symbol_start_indices = []
         self._symbol_end_indices = []
         self._found_part_numbers = []
+        self._found_numbers_list = []
+        self._sum_part_numbers = 0
 
     def search_schematic(self, input_schematic: List[str]):
         # Checking for invalid input types
@@ -57,27 +57,29 @@ class Day3:
 
             for num in number_search:
                 sub_found_part_numbers.append(int(num))
-                self._number_start_indices.append(
+                sub_number_start_indices.append(
                     list(re.finditer(num, input_schematic[i]))[
-                        sub_found_part_numbers.count(int(num))
+                        sub_found_part_numbers.count(int(num)) - 1
                     ].start()
                 )
-                self._number_end_indices.append(
+                sub_number_end_indices.append(
                     list(re.finditer(num, input_schematic[i]))[
-                        sub_found_part_numbers.count(int(num))
+                        sub_found_part_numbers.count(int(num)) - 1
                     ].end()
                 )
 
             symbol_search = self._symbol_regex_pattern.findall(input_schematic[i])
             for sym in symbol_search:
-                self._symbol_start_indices.append(
-                    list(re.finditer(sym, input_schematic[i]))[
-                        sub_found_part_symbols.count(sym)
+                if sym == self._period or sym == "\n":
+                    continue
+                sub_symbol_start_indices.append(
+                    list(re.finditer(re.escape(sym), input_schematic[i]))[
+                        sub_found_part_symbols.count(sym) - 1
                     ].start()
                 )
-                self._symbol_end_indices.append(
-                    list(re.finditer(sym, input_schematic[i]))[
-                        sub_found_part_symbols.count(sym)
+                sub_symbol_end_indices.append(
+                    list(re.finditer(re.escape(sym), input_schematic[i]))[
+                        sub_found_part_symbols.count(sym) - 1
                     ].end()
                 )
 
@@ -85,13 +87,62 @@ class Day3:
             self._number_end_indices.append(sub_number_end_indices)
             self._symbol_start_indices.append(sub_symbol_start_indices)
             self._symbol_end_indices.append(sub_symbol_end_indices)
-            self._found_part_numbers.append(sub_found_part_numbers)
+            self._found_numbers_list.append(sub_found_part_numbers)
+
+        for sub_numbers, sub_number_start_index, sub_number_end_index, row in zip(
+            self._found_numbers_list,
+            self._number_start_indices,
+            self._number_end_indices,
+            range(len(self._found_numbers_list)),
+        ):
+            self._find_part_numbers(
+                sub_numbers, sub_number_start_index, sub_number_end_index, row
+            )
+        self._sum_part_numbers = sum(self._found_part_numbers)
+
+    def _find_part_numbers(
+        self,
+        sub_numbers: List[int],
+        sub_number_start_index: List[int],
+        sub_number_end_index: List[int],
+        row: int,
+    ):
+        valid_part_number_found = False
+        for number, number_start_index, number_end_index in zip(
+            sub_numbers, sub_number_start_index, sub_number_end_index
+        ):
+            if row == 0:
+                search_range = [0, 1]
+            elif row + 1 == len(self._symbol_start_indices):
+                search_range = list(range(row - 1, row + 1))
+            else:
+                search_range = list(range(row - 1, row + 2))
+
+            for i in search_range:
+                for symbol_start_index, symbol_end_index in zip(
+                    self._symbol_start_indices[i], self._symbol_end_indices[i]
+                ):
+                    if (
+                        symbol_start_index - 1
+                        <= number_start_index
+                        <= symbol_start_index + 1
+                    ):
+                        self._found_part_numbers.append(number)
+                        valid_part_number_found = True
+                        break
+                    if symbol_end_index - 1 <= number_end_index <= symbol_end_index + 1:
+                        self._found_part_numbers.append(number)
+                        valid_part_number_found = True
+                        break
+                if valid_part_number_found:
+                    valid_part_number_found = False
+                    break
 
     def get_sum_part_numbers(self) -> int:
         return self._sum_part_numbers
 
     def get_found_part_ids(self) -> List[int]:
-        return self._total_found_part_numbers
+        return self._found_part_numbers
 
 
 if __name__ == "__main__":
