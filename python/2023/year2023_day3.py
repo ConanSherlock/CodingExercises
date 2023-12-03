@@ -130,7 +130,11 @@ class Day3:
                         self._found_part_numbers.append(number)
                         valid_part_number_found = True
                         break
-                    if symbol_end_index - 1 <= number_end_index <= symbol_end_index + 1:
+                    if (
+                        symbol_start_index - 1
+                        <= number_end_index - 1
+                        <= symbol_start_index + 1
+                    ):
                         self._found_part_numbers.append(number)
                         valid_part_number_found = True
                         break
