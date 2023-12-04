@@ -38,7 +38,7 @@ class Day2:
         self._sum_cube_power = 0
 
     def possible_configuration(self, input_string: str):
-        # Checking for invalid input types
+
         if type(input_string) != str:
             raise AoC2023Day2Exception(
                 "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))

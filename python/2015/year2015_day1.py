@@ -30,7 +30,7 @@ class Day1:
         self._basement_interation_index = BASEMENT_NOT_FOUND
 
     def calc_floor(self, input_string):
-        # Checking for invalid input types
+
         if type(input_string) != str:
             raise AoC2015Day1Exception(
                 "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))
