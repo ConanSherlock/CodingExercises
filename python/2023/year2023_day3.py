@@ -6,17 +6,15 @@ from typing import List
 class AoC2023Day3Exception(Exception):
     def __init__(self, value):
         self.value = value
-
-    def __str__(self):
-        return repr(self.value)
+        super().__init__(value)
 
 
 class Day3:
-    _PERIOD = "."
-    _NEWLINE = "\n"
-    _INVALID_TYPE_SELECTION = "Invalid data type given"
-    _NUMBER_REGEX_PATTERN = re.compile(r"(\d+)")
-    _SYMBOL_REGEX_PATTERN = re.compile(r"[^a-zA-Z0-9]")
+    PERIOD = "."
+    NEWLINE = "\n"
+    INVALID_TYPE_SELECTION = "Invalid data type given"
+    NUMBER_REGEX_PATTERN = re.compile(r"(\d+)")
+    SYMBOL_REGEX_PATTERN = re.compile(r"[^a-zA-Z0-9]")
 
     _number_start_indices: List[List[int]]
     _number_end_indices: List[List[int]]
@@ -34,22 +32,21 @@ class Day3:
         self._sum_part_numbers = 0
 
     def reset(self):
-        self._number_start_indices = []
-        self._number_end_indices = []
-        self._symbol_start_indices = []
-        self._found_part_numbers = []
-        self._found_numbers_list = []
+        self._number_start_indices.clear()
+        self._number_end_indices.clear()
+        self._symbol_start_indices.clear()
+        self._found_part_numbers.clear()
+        self._found_numbers_list.clear()
         self._sum_part_numbers = 0
 
     def search_schematic(self, input_schematic: List[str]):
         """Search the schematic for part numbers."""
         if not isinstance(input_schematic, list):
             raise AoC2023Day3Exception(
-                f"{self._INVALID_TYPE_SELECTION}: {type(input_schematic)}"
+                f"{self.INVALID_TYPE_SELECTION}: {type(input_schematic)}"
             )
 
-        for i in range(len(input_schematic)):
-            current_line = input_schematic[i]
+        for current_line in input_schematic:
             (
                 line_number_start_indices,
                 line_number_end_indices,
@@ -73,7 +70,7 @@ class Day3:
         line_number_end_indices: List[int] = []
         line_found_part_numbers: List[int] = []
 
-        numbers_in_line = self._NUMBER_REGEX_PATTERN.findall(current_line)
+        numbers_in_line = self.NUMBER_REGEX_PATTERN.findall(current_line)
 
         for num in numbers_in_line:
             line_found_part_numbers.append(int(num))
@@ -100,9 +97,9 @@ class Day3:
         line_symbol_start_indices: List[int] = []
         sub_found_part_symbols: List[str] = []
 
-        symbol_search = self._SYMBOL_REGEX_PATTERN.findall(current_line)
+        symbol_search = self.SYMBOL_REGEX_PATTERN.findall(current_line)
         for sym in symbol_search:
-            if sym == self._PERIOD or sym == self._NEWLINE:
+            if sym == self.PERIOD or sym == self.NEWLINE:
                 continue
             sub_found_part_symbols.append(sym)
             line_symbol_start_indices.append(
