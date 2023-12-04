@@ -58,20 +58,21 @@ class Day3:
             for num in number_search:
                 sub_found_part_numbers.append(int(num))
                 sub_number_start_indices.append(
-                    list(re.finditer(num, input_schematic[i]))[
-                        sub_found_part_numbers.count(int(num)) - 1
-                    ].start()
+                    list(
+                        re.finditer(r"(?<!\d){}(?!\d)".format(num), input_schematic[i])
+                    )[sub_found_part_numbers.count(int(num)) - 1].start()
                 )
                 sub_number_end_indices.append(
-                    list(re.finditer(num, input_schematic[i]))[
-                        sub_found_part_numbers.count(int(num)) - 1
-                    ].end()
+                    list(
+                        re.finditer(r"(?<!\d){}(?!\d)".format(num), input_schematic[i])
+                    )[sub_found_part_numbers.count(int(num)) - 1].end()
                 )
 
             symbol_search = self._symbol_regex_pattern.findall(input_schematic[i])
             for sym in symbol_search:
                 if sym == self._period or sym == "\n":
                     continue
+                sub_found_part_symbols.append(sym)
                 sub_symbol_start_indices.append(
                     list(re.finditer(re.escape(sym), input_schematic[i]))[
                         sub_found_part_symbols.count(sym) - 1
@@ -98,6 +99,7 @@ class Day3:
             self._find_part_numbers(
                 sub_numbers, sub_number_start_index, sub_number_end_index, row
             )
+
         self._sum_part_numbers = sum(self._found_part_numbers)
 
     def _find_part_numbers(
@@ -107,17 +109,18 @@ class Day3:
         sub_number_end_index: List[int],
         row: int,
     ):
+
+        if row == 0:
+            search_range = [0, 1]
+        elif row + 1 == len(self._symbol_start_indices):
+            search_range = list(range(row - 1, row + 1))
+        else:
+            search_range = list(range(row - 1, row + 2))
+
         valid_part_number_found = False
         for number, number_start_index, number_end_index in zip(
             sub_numbers, sub_number_start_index, sub_number_end_index
         ):
-            if row == 0:
-                search_range = [0, 1]
-            elif row + 1 == len(self._symbol_start_indices):
-                search_range = list(range(row - 1, row + 1))
-            else:
-                search_range = list(range(row - 1, row + 2))
-
             for i in search_range:
                 for symbol_start_index, symbol_end_index in zip(
                     self._symbol_start_indices[i], self._symbol_end_indices[i]
