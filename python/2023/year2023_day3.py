@@ -11,12 +11,20 @@ class AoC2023Day3Exception(Exception):
         return repr(self.value)
 
 
-INVALID_TYPE_EXCEPTION = "Invalid data type given"
-NUMBER_REGEX_PATTERN = re.compile(r"(\d+)")
-SYMBOL_REGEX_PATTERN = re.compile(r"[^a-zA-Z0-9]")
-
-
 class Day3:
+    _PERIOD = "."
+    _NEWLINE = "\n"
+    _INVALID_TYPE_SELECTION = "Invalid data type given"
+    _NUMBER_REGEX_PATTERN = re.compile(r"(\d+)")
+    _SYMBOL_REGEX_PATTERN = re.compile(r"[^a-zA-Z0-9]")
+
+    _number_start_indices: List[List[int]]
+    _number_end_indices: List[List[int]]
+    _symbol_start_indices: List[List[int]]
+    _found_part_numbers: List[int]
+    _found_numbers_list: List[List[int]]
+    _sum_part_numbers: int
+
     def __init__(self):
         self._number_start_indices = []
         self._number_end_indices = []
@@ -24,9 +32,6 @@ class Day3:
         self._found_part_numbers = []
         self._found_numbers_list = []
         self._sum_part_numbers = 0
-
-        self._period = "."
-        self._newline = "\n"
 
     def reset(self):
         self._number_start_indices = []
@@ -37,56 +42,79 @@ class Day3:
         self._sum_part_numbers = 0
 
     def search_schematic(self, input_schematic: List[str]):
-        if type(input_schematic) != list:
+        """Search the schematic for part numbers."""
+        if not isinstance(input_schematic, list):
             raise AoC2023Day3Exception(
-                "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_schematic))
+                f"{self._INVALID_TYPE_SELECTION}: {type(input_schematic)}"
             )
 
-        # Finding numbers and their start and end position in the current line and all symbols start and end positions
-        # Ensure the correct entry is selected from the regex using count with sub_found_part_symbols and
-        # line_found_part_numbers
         for i in range(len(input_schematic)):
-            line_number_start_indices: List[int] = []
-            line_number_end_indices: List[int] = []
-            line_symbol_start_indices: List[int] = []
-            line_found_part_numbers: List[int] = []
-            sub_found_part_symbols: List[str] = []
-
             current_line = input_schematic[i]
-
-            numbers_in_line = NUMBER_REGEX_PATTERN.findall(current_line)
-
-            for num in numbers_in_line:
-                line_found_part_numbers.append(int(num))
-                line_number_start_indices.append(
-                    list(re.finditer(r"(?<!\d){}(?!\d)".format(num), current_line))[
-                        line_found_part_numbers.count(int(num)) - 1
-                    ].start()
-                )
-                line_number_end_indices.append(
-                    list(re.finditer(r"(?<!\d){}(?!\d)".format(num), current_line))[
-                        line_found_part_numbers.count(int(num)) - 1
-                    ].end()
-                )
-
-            symbol_search = SYMBOL_REGEX_PATTERN.findall(current_line)
-            for sym in symbol_search:
-                if sym == self._period or sym == self._newline:
-                    continue
-                sub_found_part_symbols.append(sym)
-                line_symbol_start_indices.append(
-                    list(re.finditer(re.escape(sym), current_line))[
-                        sub_found_part_symbols.count(sym) - 1
-                    ].start()
-                )
+            (
+                line_number_start_indices,
+                line_number_end_indices,
+                line_found_part_numbers,
+            ) = self.find_numbers_in_line(current_line)
+            (
+                line_symbol_start_indices,
+                sub_found_part_symbols,
+            ) = self.find_symbols_in_line(current_line)
 
             self._number_start_indices.append(line_number_start_indices)
             self._number_end_indices.append(line_number_end_indices)
             self._symbol_start_indices.append(line_symbol_start_indices)
             self._found_numbers_list.append(line_found_part_numbers)
 
-        # Check if numbers are adjacent to symbols horizontally, vertically, or diagonally in the current,
-        # previous, and next rows
+        self.calculate_sum_of_symbol_adjacent_numbers()
+
+    def find_numbers_in_line(self, current_line: str):
+        """Find numbers and their start and end positions in a line."""
+        line_number_start_indices: List[int] = []
+        line_number_end_indices: List[int] = []
+        line_found_part_numbers: List[int] = []
+
+        numbers_in_line = self._NUMBER_REGEX_PATTERN.findall(current_line)
+
+        for num in numbers_in_line:
+            line_found_part_numbers.append(int(num))
+            current_number_regex = r"(?<!\d){}(?!\d)".format(num)
+            line_number_start_indices.append(
+                list(re.finditer(current_number_regex, current_line))[
+                    line_found_part_numbers.count(int(num)) - 1
+                ].start()
+            )
+            line_number_end_indices.append(
+                list(re.finditer(current_number_regex, current_line))[
+                    line_found_part_numbers.count(int(num)) - 1
+                ].end()
+            )
+
+        return (
+            line_number_start_indices,
+            line_number_end_indices,
+            line_found_part_numbers,
+        )
+
+    def find_symbols_in_line(self, current_line: str):
+        """Find symbols and their start positions in a line."""
+        line_symbol_start_indices: List[int] = []
+        sub_found_part_symbols: List[str] = []
+
+        symbol_search = self._SYMBOL_REGEX_PATTERN.findall(current_line)
+        for sym in symbol_search:
+            if sym == self._PERIOD or sym == self._NEWLINE:
+                continue
+            sub_found_part_symbols.append(sym)
+            line_symbol_start_indices.append(
+                list(re.finditer(re.escape(sym), current_line))[
+                    sub_found_part_symbols.count(sym) - 1
+                ].start()
+            )
+
+        return line_symbol_start_indices, sub_found_part_symbols
+
+    def calculate_sum_of_symbol_adjacent_numbers(self):
+        """Check if numbers are adjacent to symbols and calculate the sum."""
         for row, (
             sub_numbers,
             sub_number_start_index,
