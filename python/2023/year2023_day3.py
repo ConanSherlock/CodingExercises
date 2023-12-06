@@ -90,6 +90,7 @@ class Day3:
                     line_found_part_numbers.count(int(num)) - 1
                 ].end()
             )
+
         return (
             line_number_start_indices,
             line_number_end_indices,
@@ -110,6 +111,7 @@ class Day3:
                     sub_found_part_symbols.count(sym) - 1
                 ].start()
             )
+
         return line_symbol_start_indices, sub_found_part_symbols
 
     def calculate_sum_of_symbol_adjacent_numbers(self):
@@ -139,10 +141,9 @@ class Day3:
             )
         ):
             self._find_gear_ratios(sub_symbols, sub_symbol_start_index, row)
+
         for gear_numbers in self._found_gear_numbers_list:
-            self._sum_gear_ratio = self._sum_gear_ratio + (
-                gear_numbers[0] * gear_numbers[1]
-            )
+            self._sum_gear_ratio += gear_numbers[0] * gear_numbers[1]
 
     @staticmethod
     def _is_within_range(start: int, value: int, end: int):
@@ -181,6 +182,7 @@ class Day3:
             search_range = [row - 1, row]
         else:
             search_range = [row - 1, row, row + 1]
+
         for number, number_start, number_end in zip(
             sub_numbers, sub_number_start_index, sub_number_end_index
         ):
@@ -202,6 +204,7 @@ class Day3:
             search_range = [row - 1, row]
         else:
             search_range = [row - 1, row, row + 1]
+
         for symbol, symbol_start in zip(sub_symbols, sub_symbol_start_index):
             if symbol not in self.GEAR_SYMBOL:
                 continue
