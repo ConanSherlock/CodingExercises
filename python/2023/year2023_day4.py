@@ -27,7 +27,7 @@ class Day4:
         self._winning_pulls = 0
         self._winning_card = False
         self._card_copies = {}
-        self._total_number_of_scratch_cards_won = 0
+        self._total_number_of_scratch_cards = 0
 
     def reset(self):
         self._card_value = 0
@@ -37,7 +37,7 @@ class Day4:
         self._card_copies.clear()
         self._winning_pulls = 0
         self._winning_card = False
-        self._total_number_of_scratch_cards_won = 0
+        self._total_number_of_scratch_cards = 0
 
     def calc_scratch_card_value(self, card: str):
         self._winning_card = False
@@ -68,20 +68,24 @@ class Day4:
         self._card_copies = {i: 0 for i in range(len(card_list))}
         for card_num, card in enumerate(card_list):
             self.calc_scratch_card_value(card)
-            self._update_card_copy_dict(card_num)
+            if self._winning_card:
+                self._update_card_copy_dict(card_num)
 
         for card_num in self._card_copies:
             for i in range(0, self._card_copies[card_num]):
                 self.calc_scratch_card_value(card_list[card_num])
-                self._update_card_copy_dict(card_num)
-            self._total_number_of_scratch_cards_won += self._card_copies[card_num]
+                if self._winning_card:
+                    self._update_card_copy_dict(card_num)
+                else:
+                    continue
+            self._total_number_of_scratch_cards += self._card_copies[card_num]
+        self._total_number_of_scratch_cards += len(card_list)
 
     def _update_card_copy_dict(self, card_num):
-        if self._winning_card:
-            for i in range(1, self._winning_pulls + 1):
-                card_copy_key = card_num + i
-                if card_copy_key in self._card_copies:
-                    self._card_copies[card_copy_key] += 1
+        for i in range(1, self._winning_pulls + 1):
+            card_copy_key = card_num + i
+            if card_copy_key in self._card_copies:
+                self._card_copies[card_copy_key] += 1
 
     def _count_winning_pulls(self):
         for pulled_number in self._pulled_numbers:
@@ -108,7 +112,7 @@ class Day4:
         return self._sum_card_values
 
     def get_total_cards_won(self) -> int:
-        return self._total_number_of_scratch_cards_won
+        return self._total_number_of_scratch_cards
 
 
 if __name__ == "__main__":
