@@ -35,7 +35,7 @@ class Day1:
         self._current_calibration = -1
 
     def find_calibration(self, input_string: str, advanced_calibration: bool = False):
-        # Checking for invalid input types
+
         if type(input_string) != str:
             raise AoC2023Day1Exception(
                 "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))

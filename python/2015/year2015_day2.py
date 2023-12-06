@@ -46,7 +46,7 @@ class Day2:
         self._total_ribbon_required = 0
 
     def calc_dimensions(self, input_string):
-        # Checking for invalid input types
+
         if type(input_string) != str:
             raise AoC2015Day2Exception(
                 "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))

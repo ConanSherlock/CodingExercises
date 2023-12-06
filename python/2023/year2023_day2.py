@@ -38,7 +38,7 @@ class Day2:
         self._sum_cube_power = 0
 
     def possible_configuration(self, input_string: str):
-        # Checking for invalid input types
+
         if type(input_string) != str:
             raise AoC2023Day2Exception(
                 "%s: %s" % (INVALID_TYPE_EXCEPTION, type(input_string))
@@ -133,9 +133,9 @@ class Day2:
 
 if __name__ == "__main__":
 
-    day1_file_path = "../../test/input_data/2023/day2_input.txt"
+    day2_file_path = "../../test/input_data/2023/day2_input.txt"
 
-    with open(day1_file_path, "r") as input_file:
+    with open(day2_file_path, "r") as input_file:
         input_data = input_file.readlines()
 
     day2 = Day2()
