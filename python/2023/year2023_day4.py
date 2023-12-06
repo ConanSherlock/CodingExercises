@@ -42,7 +42,6 @@ class Day4:
     def calc_scratch_card_value(self, card: str):
         self._winning_card = False
 
-        """Search the schematic for part numbers."""
         if not isinstance(card, str):
             raise AoC2023Day4Exception(f"{self.INVALID_TYPE_SELECTION}: {type(card)}")
         self._winning_pulls = 0
@@ -72,20 +71,17 @@ class Day4:
                 self._update_card_copy_dict(card_num)
 
         for card_num in self._card_copies:
-            for i in range(0, self._card_copies[card_num]):
-                self.calc_scratch_card_value(card_list[card_num])
-                if self._winning_card:
-                    self._update_card_copy_dict(card_num)
-                else:
-                    continue
+            self.calc_scratch_card_value(card_list[card_num])
+            if self._winning_card:
+                self._update_card_copy_dict(card_num, self._card_copies[card_num])
             self._total_number_of_scratch_cards += self._card_copies[card_num]
         self._total_number_of_scratch_cards += len(card_list)
 
-    def _update_card_copy_dict(self, card_num):
+    def _update_card_copy_dict(self, card_num: int, update_num: int = 1):
         for i in range(1, self._winning_pulls + 1):
             card_copy_key = card_num + i
             if card_copy_key in self._card_copies:
-                self._card_copies[card_copy_key] += 1
+                self._card_copies[card_copy_key] += update_num
 
     def _count_winning_pulls(self):
         for pulled_number in self._pulled_numbers:
@@ -120,17 +116,17 @@ if __name__ == "__main__":
     if not os.path.exists(day4_file_path):
         raise FileNotFoundError(f"File not found: {day4_file_path}")
     day4 = Day4()
-    # try:
-    #     with open(day4_file_path, "r") as input_file:
-    #         input_scratch_cards = input_file.readlines()
-    #         if not input_scratch_cards:
-    #             raise AoC2023Day4Exception("Input schematic is empty")
-    #         for current_card in input_scratch_cards:
-    #             day4.calc_scratch_card_value(current_card)
-    # except OSError as e:
-    #     raise AoC2023Day4Exception(f"Error reading file: {e}")
-    # print("--- Day 4: Scratchcards ---")
-    # print(f"Part A Point value of all cards: {day4.get_total_card_value()}")
+    try:
+        with open(day4_file_path, "r") as input_file:
+            input_scratch_cards = input_file.readlines()
+            if not input_scratch_cards:
+                raise AoC2023Day4Exception("Input schematic is empty")
+            for current_card in input_scratch_cards:
+                day4.calc_scratch_card_value(current_card)
+    except OSError as e:
+        raise AoC2023Day4Exception(f"Error reading file: {e}")
+    print("--- Day 4: Scratchcards ---")
+    print(f"Part A Point value of all cards: {day4.get_total_card_value()}")
 
     day4.reset()
     try:
