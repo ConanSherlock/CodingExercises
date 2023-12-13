@@ -82,8 +82,6 @@ class AoC2023Day3Test(unittest.TestCase):
             expected_sum_gears,
             self.day3_instance.get_sum_gear_ratio(),
         )
-        print(expected_sum_gears)
-        print(self.day3_instance.get_sum_gear_ratio())
 
         self.day3_instance.reset()
 

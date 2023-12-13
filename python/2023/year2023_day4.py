@@ -40,10 +40,9 @@ class Day4:
         self._total_number_of_scratch_cards = 0
 
     def calc_scratch_card_value(self, card: str):
-        self._winning_card = False
-
         if not isinstance(card, str):
             raise AoC2023Day4Exception(f"{self.INVALID_TYPE_SELECTION}: {type(card)}")
+        self._winning_card = False
         self._winning_pulls = 0
         card_search_match = self.CARD_REGEX.match(card)
 
@@ -64,6 +63,17 @@ class Day4:
         self._update_sum_cards_value()
 
     def calc_total_cards(self, card_list: List[str]):
+        if not isinstance(card_list, list):
+            raise AoC2023Day4Exception(
+                f"{self.INVALID_TYPE_SELECTION}: {type(card_list)}"
+            )
+        else:
+            for x in card_list:
+                if not isinstance(x, str):
+                    raise AoC2023Day4Exception(
+                        f"{self.INVALID_TYPE_SELECTION} in list: {type(x)}"
+                    )
+
         self._card_copies = {i: 0 for i in range(len(card_list))}
         for card_num, card in enumerate(card_list):
             self.calc_scratch_card_value(card)
@@ -104,10 +114,10 @@ class Day4:
     def _convert_str_list_to_int(string_list: List[str]):
         return [int(x) for x in string_list]
 
-    def get_total_card_value(self) -> int:
+    def get_total_cards_value(self) -> int:
         return self._sum_card_values
 
-    def get_total_cards_won(self) -> int:
+    def get_total_cards_after_winnings(self) -> int:
         return self._total_number_of_scratch_cards
 
 
@@ -126,7 +136,7 @@ if __name__ == "__main__":
     except OSError as e:
         raise AoC2023Day4Exception(f"Error reading file: {e}")
     print("--- Day 4: Scratchcards ---")
-    print(f"Part A Point value of all cards: {day4.get_total_card_value()}")
+    print(f"Part A Point value of all cards: {day4.get_total_cards_value()}")
 
     day4.reset()
     try:
@@ -137,4 +147,6 @@ if __name__ == "__main__":
             day4.calc_total_cards(input_scratch_cards)
     except OSError as e:
         raise AoC2023Day4Exception(f"Error reading file: {e}")
-    print(f"Part B Sum of all of the gear ratio values: {day4.get_total_cards_won()}")
+    print(
+        f"Part B Number of cards after all winnings: {day4.get_total_cards_after_winnings()}"
+    )
