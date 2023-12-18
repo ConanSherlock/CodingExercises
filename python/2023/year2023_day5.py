@@ -217,41 +217,49 @@ class Day5:
         for seed in seed_iter:
             temp_start = seed
             temp_end = seed + next(seed_iter) - 1
+
             # soil
             temp_range_info = self._map_range_values(
                 self._seed_to_soil_map, [(temp_start, temp_end)]
             )
             print(temp_range_info)
+
             # fertilizer
             temp_range_info = self._map_range_values(
                 self._soil_to_fertilizer_map, temp_range_info
             )
             print(temp_range_info)
+
             # water
             temp_range_info = self._map_range_values(
                 self._fertilizer_to_water_map, temp_range_info
             )
             print(temp_range_info)
+
             # light
             temp_range_info = self._map_range_values(
                 self._water_to_to_light_map, temp_range_info
             )
             print(temp_range_info)
+
             # temperature
             temp_range_info = self._map_range_values(
                 self._light_to_temperature_map, temp_range_info
             )
             print(temp_range_info)
+
             # humidity
             temp_range_info = self._map_range_values(
                 self._temperature_to_humidity_map, temp_range_info
             )
             print(temp_range_info)
+
             # location
             temp_range_info = self._map_range_values(
                 self._humidity_to_location_map, temp_range_info
             )
             print(temp_range_info)
+
             for value_tuple in temp_range_info:
                 # for i in range(value_tuple[0], value_tuple[1]):
                 self._location_list.append(value_tuple[0])
@@ -277,6 +285,7 @@ class Day5:
         self,
         current_map: List[Tuple[int, int, int, int]],
         values_list: List[Tuple[int, int]],
+        retry: bool = False,
     ) -> List[Tuple[int, int]]:
         return_mapped_list = []
         for value in values_list:
@@ -295,6 +304,7 @@ class Day5:
                     <= end_value
                     <= mapping[self.TUPLE_MAP_FINAL_FROM_POSITION]
                 )
+
                 if start_value_in_range and end_value_in_range:
                     new_start_range_found = True
                     new_end_range_found = True
@@ -320,8 +330,8 @@ class Day5:
                             mapping[self.TUPLE_MAP_FINAL_TO_POSITION],
                         )
                     )
-                    start_value = mapping[self.TUPLE_MAP_FINAL_FROM_POSITION] - 1
-                    # break
+                    start_value = mapping[self.TUPLE_MAP_FINAL_FROM_POSITION] + 1
+
                 elif end_value_in_range:
                     new_end_range_found = True
                     return_mapped_list.append(
@@ -332,12 +342,22 @@ class Day5:
                             + mapping[self.TUPLE_MAP_INITIAL_TO_POSITION],
                         )
                     )
-                    end_value = mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION] + 1
-                    # break
-            if not new_start_range_found or not new_end_range_found:
+                    end_value = mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
+
+            if (
+                not new_start_range_found
+                and not new_end_range_found
+                and start_value != end_value
+                and not retry
+            ):
+                return_mapped_list.append(
+                    self._map_range_values(
+                        current_map, [(start_value, end_value)], True
+                    )[0]
+                )
+            elif start_value != end_value:
                 return_mapped_list.append((start_value, end_value))
-            # else:
-            #     return_mapped_list.append(self._map_range_values(current_map, [(start_value, end_value)])[0])
+
         return_mapped_list.sort()
         return return_mapped_list
 
