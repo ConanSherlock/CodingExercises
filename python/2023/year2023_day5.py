@@ -261,7 +261,6 @@ class Day5:
             print(temp_range_info)
 
             for value_tuple in temp_range_info:
-                # for i in range(value_tuple[0], value_tuple[1]):
                 self._location_list.append(value_tuple[0])
 
     def _map_value(
