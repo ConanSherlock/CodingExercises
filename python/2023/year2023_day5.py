@@ -285,78 +285,112 @@ class Day5:
         self,
         current_map: List[Tuple[int, int, int, int]],
         values_list: List[Tuple[int, int]],
-        retry: bool = False,
     ) -> List[Tuple[int, int]]:
         return_mapped_list = []
-        for value in values_list:
-            new_start_range_found = False
-            new_end_range_found = False
-            start_value = value[0]
-            end_value = value[1]
+        # for value in values_list:
+        pairs_to_check = values_list
+        while pairs_to_check:
+            current_pair = pairs_to_check.pop()
+
             for mapping in current_map:
                 start_value_in_range = (
                     mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
-                    <= start_value
+                    <= current_pair[0]
                     <= mapping[self.TUPLE_MAP_FINAL_FROM_POSITION]
                 )
                 end_value_in_range = (
                     mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
-                    <= end_value
+                    <= current_pair[1]
                     <= mapping[self.TUPLE_MAP_FINAL_FROM_POSITION]
                 )
 
+                inner_start_range = (
+                    current_pair[0]
+                    <= mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
+                    <= current_pair[1]
+                )
+                inner_end_range = (
+                    current_pair[0]
+                    <= mapping[self.TUPLE_MAP_FINAL_FROM_POSITION]
+                    <= current_pair[1]
+                )
+
+                if (
+                    not start_value_in_range
+                    and not end_value_in_range
+                    and not inner_start_range
+                    and not inner_end_range
+                ):
+                    continue
+
                 if start_value_in_range and end_value_in_range:
-                    new_start_range_found = True
-                    new_end_range_found = True
                     start_value = (
-                        start_value
+                        current_pair[0]
                         - mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
                         + mapping[self.TUPLE_MAP_INITIAL_TO_POSITION]
                     )
                     end_value = (
-                        end_value
+                        current_pair[1]
                         - mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
                         + mapping[self.TUPLE_MAP_INITIAL_TO_POSITION]
                     )
                     return_mapped_list.append((start_value, end_value))
                     break
                 elif start_value_in_range:
-                    new_start_range_found = True
                     return_mapped_list.append(
                         (
-                            start_value
+                            current_pair[0]
                             - mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
                             + mapping[self.TUPLE_MAP_INITIAL_TO_POSITION],
                             mapping[self.TUPLE_MAP_FINAL_TO_POSITION],
                         )
                     )
-                    start_value = mapping[self.TUPLE_MAP_FINAL_FROM_POSITION] + 1
+                    start_value = mapping[self.TUPLE_MAP_FINAL_FROM_POSITION]
+                    if start_value != current_pair[1]:
+                        pairs_to_check.append((start_value + 1, current_pair[1]))
+                    break
 
                 elif end_value_in_range:
-                    new_end_range_found = True
                     return_mapped_list.append(
                         (
                             mapping[self.TUPLE_MAP_INITIAL_TO_POSITION],
-                            end_value
+                            current_pair[1]
                             - mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
                             + mapping[self.TUPLE_MAP_INITIAL_TO_POSITION],
                         )
                     )
                     end_value = mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION]
 
-            if (
-                not new_start_range_found
-                and not new_end_range_found
-                and start_value != end_value
-                and not retry
-            ):
-                return_mapped_list.append(
-                    self._map_range_values(
-                        current_map, [(start_value, end_value)], True
-                    )[0]
-                )
-            elif start_value != end_value:
-                return_mapped_list.append((start_value, end_value))
+                    if current_pair[0] != end_value:
+                        pairs_to_check.append((current_pair[0], end_value - 1))
+                    break
+                elif inner_start_range and inner_end_range:
+                    return_mapped_list.append(
+                        (
+                            mapping[self.TUPLE_MAP_INITIAL_TO_POSITION],
+                            mapping[self.TUPLE_MAP_FINAL_TO_POSITION] - 1,
+                        )
+                    )
+                    if current_pair[0] != (
+                        mapping[self.TUPLE_MAP_INITIAL_TO_POSITION] - 1
+                    ):
+                        pairs_to_check.append(
+                            (
+                                current_pair[0],
+                                mapping[self.TUPLE_MAP_INITIAL_FROM_POSITION] - 1,
+                            )
+                        )
+
+                    if current_pair[1] != (mapping[self.TUPLE_MAP_FINAL_TO_POSITION]):
+                        pairs_to_check.append(
+                            (
+                                mapping[self.TUPLE_MAP_FINAL_FROM_POSITION] + 1,
+                                current_pair[1],
+                            )
+                        )
+                    break
+            else:
+                return_mapped_list.append((current_pair[0], current_pair[1]))
 
         return_mapped_list.sort()
         return return_mapped_list
