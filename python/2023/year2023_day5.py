@@ -222,43 +222,39 @@ class Day5:
             temp_range_info = self._map_range_values(
                 self._seed_to_soil_map, [(temp_start, temp_end)]
             )
-            print(temp_range_info)
 
             # fertilizer
             temp_range_info = self._map_range_values(
                 self._soil_to_fertilizer_map, temp_range_info
             )
-            print(temp_range_info)
 
             # water
             temp_range_info = self._map_range_values(
                 self._fertilizer_to_water_map, temp_range_info
             )
-            print(temp_range_info)
+
 
             # light
             temp_range_info = self._map_range_values(
                 self._water_to_to_light_map, temp_range_info
             )
-            print(temp_range_info)
+
 
             # temperature
             temp_range_info = self._map_range_values(
                 self._light_to_temperature_map, temp_range_info
             )
-            print(temp_range_info)
 
             # humidity
             temp_range_info = self._map_range_values(
                 self._temperature_to_humidity_map, temp_range_info
             )
-            print(temp_range_info)
+
 
             # location
             temp_range_info = self._map_range_values(
                 self._humidity_to_location_map, temp_range_info
             )
-            print(temp_range_info)
 
             for value_tuple in temp_range_info:
                 self._location_list.append(value_tuple[0])
@@ -286,7 +282,7 @@ class Day5:
         values_list: List[Tuple[int, int]],
     ) -> List[Tuple[int, int]]:
         return_mapped_list = []
-        # for value in values_list:
+
         pairs_to_check = values_list
         while pairs_to_check:
             current_pair = pairs_to_check.pop()
@@ -348,7 +344,6 @@ class Day5:
                     if start_value != current_pair[1]:
                         pairs_to_check.append((start_value + 1, current_pair[1]))
                     break
-
                 elif end_value_in_range:
                     return_mapped_list.append(
                         (
