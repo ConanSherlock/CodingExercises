@@ -153,6 +153,4 @@ if __name__ == "__main__":
     except OSError as e:
         raise AoC2023Day6Exception(f"Error reading file: {e}")
 
-    print(
-        f"Part A Point value of all race wins multiplied: {day6.get_races_point_value()}"
-    )
+    print(f"Part B Point value of single big race: {day6.get_races_point_value()}")
