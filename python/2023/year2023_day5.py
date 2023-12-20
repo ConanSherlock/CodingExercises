@@ -233,12 +233,10 @@ class Day5:
                 self._fertilizer_to_water_map, temp_range_info
             )
 
-
             # light
             temp_range_info = self._map_range_values(
                 self._water_to_to_light_map, temp_range_info
             )
-
 
             # temperature
             temp_range_info = self._map_range_values(
@@ -249,7 +247,6 @@ class Day5:
             temp_range_info = self._map_range_values(
                 self._temperature_to_humidity_map, temp_range_info
             )
-
 
             # location
             temp_range_info = self._map_range_values(
